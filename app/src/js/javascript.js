@@ -271,7 +271,7 @@ const mySPA = (function () {
         }
 
         this.sendRequest('GET', baseURL + "/ulyana/check")
-            .then(user => console.log(user))
+            .then(user => myView.addBack(user))
             .catch(err => console.log(err));
 
         this.openHeaderMenu = function (state) {
@@ -777,6 +777,13 @@ const mySPA = (function () {
         this.updateGameTime = function (time) {
             const gameStatus = myContainer.querySelector('.game-header');
             gameStatus.textContent = time;
+        }
+
+        this.addBack = function (user) {
+            const footer = myContainer.querySelector('.footer');
+            const p = document.createElement('p');
+            p.textContent = user.name;
+            footer.append(p);
         }
     }
 

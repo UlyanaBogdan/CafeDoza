@@ -1,3 +1,3 @@
 export const getUrls = {
-    baseURL: "http://172.17.0.1:9090",
+    baseURL: "http://45.82.71.93:8091",
 }
