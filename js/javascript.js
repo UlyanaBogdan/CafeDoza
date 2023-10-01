@@ -268,7 +268,7 @@ const mySPA = (function () {
         }
 
         this.sendRequest('GET', 'http://45.82.71.93:8091/ulyana/hello')
-            .then(user => myView.changeHeader(user))
+            .then(user => console.log(user))
             .catch(err => console.log(err));
 
         this.openHeaderMenu = function (state) {
@@ -774,11 +774,6 @@ const mySPA = (function () {
         this.updateGameTime = function (time) {
             const gameStatus = myContainer.querySelector('.game-header');
             gameStatus.textContent = time;
-        }
-
-        this.changeHeader = function (data) {
-            const header = myContainer.querySelector('.main-description');
-            header.textContent = data;
         }
     }
 
