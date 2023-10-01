@@ -10,6 +10,8 @@ import {
 
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
 
+import {getUrls} from "./config.js";
+
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -227,6 +229,7 @@ const mySPA = (function () {
         let clicks = 0;
         let timeOut = 5000;
         let gameIsStarted = false;
+        const baseURL = getUrls.baseURL;
 
         this.init = function (view) {
             myView = view;
@@ -267,7 +270,7 @@ const mySPA = (function () {
             });
         }
 
-        this.sendRequest('GET', 'http://45.82.71.93:8091/ulyana/hello')
+        this.sendRequest('GET', baseURL + "/ulyana/check")
             .then(user => console.log(user))
             .catch(err => console.log(err));
 
