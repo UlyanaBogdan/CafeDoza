@@ -382,6 +382,8 @@ dist/
 nbdist/
 nbactions.xml
 .nb-gradle/
+run.sh
+app/src/js/config.js
 
 
 ### Sass ###
