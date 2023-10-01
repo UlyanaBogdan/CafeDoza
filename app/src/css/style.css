@@ -657,7 +657,7 @@ h2 {
 .my-cabinet {
     min-height: 108vh;
     width: 100%;
-    background: url("../img/cabinetwallpaper.jpg") no-repeat;
+    background: url("imgtwallpaper.jpg") no-repeat;
     background-size: cover;
     display: flex;
     align-items: center;
