@@ -152,13 +152,13 @@ const Progress = {
             </div>
             <div class="code-input-block">
                 <input type="text" class="code-input" placeholder="your code">
-                <button type="button" class="search-btn"><img src="../img/plusAuth.svg"></button>
+                <button type="button" class="search-btn"><img src="./img/plusAuth.svg"></button>
             </div>
             <h2 class="bonuses-greeting animate__animated animate__pulse animate__slow lng">My Bonuses</h2>
             <button class="check-bonuses-btn lng">Check bonuses!</button>
             <div class="progress-bar"><span class="cup-progress"></span></div>
             <div class="have-bonuses animate__animated animate__pulse animate__slow animate__infinite">
-                <img class="bonus-number-img" src="../img/gift.svg">
+                <img class="bonus-number-img" src="./img/gift.svg">
                 <p class="bonus-number"></p>
             </div>
         </section>
@@ -185,7 +185,7 @@ const GameComp = {
           <h2 class="lng">Play the clicker!</h2>
           <p class="game-header lng">Tap the logo to start!</p>
           <p class="clicks lng"></p>
-          <button class="click-btn"><img src="../img/logo.png" </button>
+          <button class="click-btn"><img src="./img/logo.png" </button>
         </section>
         `
   }
