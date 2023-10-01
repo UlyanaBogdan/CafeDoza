@@ -34,66 +34,73 @@ const languages = {
         "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "logout" : {
+        "ru": "Выйти",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
-    "you" : {
-        "ru": "Ты",
-        "en": "You",
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
         "pl": "",
     },
+    "firsttimegreet" : {
+        "ru": "Привет, впервые тут?",
+        "en": "",
+        "pl": "",
+    },
+
+
 
 }
 

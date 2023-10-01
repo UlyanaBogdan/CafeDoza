@@ -37,7 +37,7 @@ const ModalAuth = {
         <div class="closed modal-overlay"></div>
         <div class="closed auth-modal" >
           <button type="button" class="close-auth"><img src="./img/plusAuth.svg" class="plus-auth-img"></button>
-          <h3 class="first-time-text closed lng">Hi, first time here?</h3>
+          <h3 class="first-time-text closed lng-firsttimegreet">Hi, first time here?</h3>
           <h3 class="hi-again-text lng">Hi again!</h3>
           <input type="text" class="name-input reg-part closed" placeholder="Name" autocomplete="on">
           <input type="email" class="email-input" placeholder="Email" autocomplete="on">
@@ -102,7 +102,7 @@ const CoffeeShops = {
         <section class="maps">
           <img src="./img/coffee-shop-location-icon.png" class="maps-icon">
           <div class="map wow animate__fadeInUp animate__slow">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A9f0a0f2d566cd4e4b735431bcfaa522e7d7250967e8d84bfa56412a459590ead&amp;source=constructor" width="700" height="470" frameborder="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2442.0806188191127!2d20.97419517639512!3d52.26008105544097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecb4a069b2e0d%3A0xf35d0fa593c6e15e!2sDoza!5e0!3m2!1sru!2sby!4v1696189307559!5m2!1sru!2sby" width="700" height="470" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </section>
         `
