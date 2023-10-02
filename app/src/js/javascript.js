@@ -1,3 +1,4 @@
+
 import {
     getDatabase,
     ref,
@@ -811,8 +812,9 @@ const mySPA = (function () {
     };
 }());
 
-document.addEventListener("DOMContentLoaded", mySPA.init({
-    container: "app",
-    routes: routes,
-    components: components,
-}));
+// document.addEventListener("DOMContentLoaded", mySPA.init({
+//     container: "app",
+//     routes: routes,
+//     components: components,
+// }));
+mySPA.init("app", routes, components);

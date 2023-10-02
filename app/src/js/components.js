@@ -40,7 +40,7 @@ const ModalAuth = {
           <h3 class="first-time-text closed lng-firsttimegreet">Hi, first time here?</h3>
           <h3 class="hi-again-text lng">Hi again!</h3>
           <input type="text" class="name-input reg-part closed" placeholder="Name" autocomplete="on">
-          <input type="email" class="email-input" placeholder="Email" autocomplete="on">
+          <input type="email" class="email-input" placeholder="Email" autocomplete="on" autofocus>
           <input type="password" class="input-password" placeholder="Password">
           <div class="error-auth"></div>
           <button type="button" class="reg-btn reg-part closed lng">sign up</button>
@@ -200,3 +200,7 @@ const Footer = {
         `
   }
 }
+
+
+
+
