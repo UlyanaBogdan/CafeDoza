@@ -1,15 +1,17 @@
 {
-  "name": "macaroon",
+  "name": "my-spa",
   "version": "0.0.1",
   "description": "SPA with modules",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js --watch"
+    "dev": "node app.js"
   },
   "dependencies": {
-    "browser-sync": "^2.29.3",
-    "browser-sync-spa": "^1.0.0",
-    "firebase": "^10.3.0",
-    "gulp": "^4.0.2"
+    "browser-sync": "^2.27.9",
+    "express": "^4.18.2"
+  },
+  "content_security_policy": "script-src 'unsafe-inline' 'sha256-AF490//jIflwN/2nTDszvAx/KI2V9GJG8gdwvGhO/zw='",
+  "devDependencies": {
+    "html5-qrcode": "^2.3.8"
   }
 }
