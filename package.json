@@ -1,12 +1,15 @@
 {
-  "name": "my-spa",
+  "name": "macaroon",
   "version": "0.0.1",
   "description": "SPA with modules",
   "main": "app.js",
   "scripts": {
-    "dev": "node app.js"
+    "start": "node app.js --watch"
   },
   "dependencies": {
-    "browser-sync": "^2.27.9"
+    "browser-sync": "^2.29.3",
+    "browser-sync-spa": "^1.0.0",
+    "firebase": "^10.3.0",
+    "gulp": "^4.0.2"
   }
 }
