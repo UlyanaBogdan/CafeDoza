@@ -7,7 +7,7 @@ const CoffeeShops = {
             <div class="location wow animate__fadeInUp animate__slow">
               <div class="shop-name">
                 <img src="./img/coffeshopicon.png">
-                <p class="lng">Coffee-shop</p>
+                <p class="lng">Cafe Doza</p>
               </div>
               <img src="./img/coffeeshop3.jpg" class="shop-photo">
               <p class="shop-address lng">Radygiera, 11, Warsaw</p>
