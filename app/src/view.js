@@ -215,12 +215,14 @@ function myView() {
             const bonusText = myContainer.querySelector('.bonuses-greeting');
             bonusText.innerText = `Check your bonuses, ${user.name}!`;
             const bonusNumber = myContainer.querySelector('.bonus-number');
-            bonusNumber.innerText = user.winCups;
+            bonusNumber.innerText = user.bonuses;
         }
         myBonusesMenu.classList.remove('closed');
         this.clearInputs();
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
+        const qr = myContainer.querySelector('.qr-user');
+        qr.setAttribute('src', `${user.qrUrl}`);
     }
 
     this.showBonuses = function (user) {

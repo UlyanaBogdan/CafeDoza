@@ -30,6 +30,7 @@ function myModel() {
     let timeOut = 5000;
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
+    let registeredUser = null;
 
     this.init = function (view) {
         myView = view;
@@ -70,9 +71,74 @@ function myModel() {
         });
     }
 
-    this.sendRequest('GET', baseURL + "/ulyana/check")
-        .then(user => myView.addBack(user))
-        .catch(err => console.log(err));
+    this.regUser = function(email, password, name) {
+        const user = {
+            name: name,
+            email: email,
+            password: password
+        }
+        //ADD VALIDATION
+        /**
+        *  user = {
+         *      name,
+         *      token,
+         *      bonuses,
+         *      cups,
+         *      qrUrl,
+         *  }
+         */
+        registeredUser = this.sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(user));
+        setCookie('token', registeredUser.token);
+    }
+
+    this.loginUser = function(email, password) {
+        //ADD VALIDATION
+        const user = {
+            email: email,
+            password: password
+        }
+        registeredUser = sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(user));
+        setCookie('token', registeredUser.token);
+    }
+
+    this.getUser = function() {
+        // const token = getCookie('token');
+        // if (token != undefined) {
+            registeredUser = this.sendRequest('GET', "http://45.82.71.93:8088/get_user"); //TODO
+            return true;
+        // }
+    }
+
+    this.manageUser = function() {
+        if (this.getUser()) {
+            myView.changePageUserIn(registeredUser);
+        }
+    }
+
+    this.logoutUser = function() {
+        if (this.getUser()) {
+            deleteCookie('token');
+            myView.hideUser;
+        }
+    }
+
+    this.getQR = function() {
+
+    }
+
+    this.searchCookie = function() {
+        let coks = getCookie('token');
+        console.log(coks);
+    }
+
+
+    // this.sendRequest('GET', baseURL + "/ulyana/check")
+    //     .then(user => console.log(user))
+    //     .catch(err => console.log(err));
+    //
+    // this.sendRequest('GET', baseURL + "/ulyana/check")
+    //     .then(user => myView.addBack(user))
+    //     .catch(err => console.log(err));
 
     this.openHeaderMenu = function (state) {
         if (state === "closed") {
@@ -98,64 +164,99 @@ function myModel() {
         myView.changeToLog();
     }
 
-    this.signIn = function (email, password) {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
+    // this.signIn = function (email, password) {
+    //     signInWithEmailAndPassword(auth, email, password)
+    //         .then((userCredential) => {
+    //             const user = userCredential.user;
+    //
+    //             update(ref(database, "UsersList/" + user.uid),
+    //                 {
+    //                     email: email,
+    //                 })
+    //             myView.successLog();
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             myView.errorAuth(errorCode);
+    //         });
+    // }
+    //
+    // this.signUp = function (email, password, name) {
+    //     createUserWithEmailAndPassword(auth, email, password, name)
+    //         .then((userCredential) => {
+    //             const user = userCredential.user;
+    //             set(ref(database, "UsersList/" + user.uid),
+    //                 {
+    //                     email: email,
+    //                     name: name,
+    //                     bonuses: 0,
+    //                     record: 0,
+    //                     winCups: 0,
+    //                 })
+    //             myView.successReg();
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             myView.errorAuth(errorCode);
+    //         });
+    // }
+    //
+    // this.logout = function () {
+    //     signOut(auth).then(() => {
+    //         myView.logout();
+    //     }).catch((error) => {
+    //         const errorCode = error.code;
+    //         myView.error(errorCode);
+    //     });
+    // }
 
-                update(ref(database, "UsersList/" + user.uid),
-                    {
-                        email: email,
-                    })
-                myView.successLog();
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                myView.errorAuth(errorCode);
-            });
-    }
+    // this.manageUser = function () {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             const uid = auth.currentUser.uid;
+    //             get(child(ref(database), "UsersList/" + uid))
+    //                 .then(snapshot => {
+    //                     const user = snapshot.val();
+    //                     myView.changePageUserIn(user);
+    //                 })
+    //         }
+    //     });
+    // }
 
-    this.signUp = function (email, password, name) {
-        createUserWithEmailAndPassword(auth, email, password, name)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                set(ref(database, "UsersList/" + user.uid),
-                    {
-                        email: email,
-                        name: name,
-                        bonuses: 0,
-                        record: 0,
-                        winCups: 0,
-                    })
-                myView.successReg();
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                myView.errorAuth(errorCode);
-            });
-    }
-
-    this.logout = function () {
-        signOut(auth).then(() => {
-            myView.logout();
-        }).catch((error) => {
-            const errorCode = error.code;
-            myView.error(errorCode);
-        });
-    }
-
-    this.manageUser = function () {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = auth.currentUser.uid;
-                get(child(ref(database), "UsersList/" + uid))
-                    .then(snapshot => {
-                        const user = snapshot.val();
-                        myView.changePageUserIn(user);
-                    })
-            }
-        });
-    }
+    // this.setCookie = function (name, value, options = { path: '/' }) {
+    //     /*
+    //     Sets a cookie with specified name (str), value (str) & options (dict)
+    //
+    //     options keys:
+    //       - path (str) - URL, for which this cookie is available (must be absolute!)
+    //       - domain (str) - domain, for which this cookie is available
+    //       - expires (Date object) - expiration date&time of cookie
+    //       - max-age (int) - cookie lifetime in seconds (alternative for expires option)
+    //       - secure (bool) - if true, cookie will be available only for HTTPS.
+    //                         IT CAN'T BE FALSE
+    //       - samesite (str) - XSRF protection setting.
+    //                          Can be strict or lax
+    //                          Read https://web.dev/samesite-cookies-explained/ for details
+    //       - httpOnly (bool) - if true, cookie won't be available for using in JavaScript
+    //                           IT CAN'T BE FALSE
+    //     */
+    //     if (options.expires instanceof Date) {
+    //         options.expires = options.expires.toUTCString();
+    //     }
+    //
+    //     if (value instanceof Object) {
+    //         value = JSON.stringify(value);
+    //     }
+    //
+    //     let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    //     for (let optionKey in options) {
+    //         updatedCookie += "; " + optionKey;
+    //         if (options[optionKey] !== true) {
+    //             updatedCookie += "=" + options[optionKey];
+    //         }
+    //     }
+    //     document.cookie = updatedCookie;
+    // }
 
     this.closeSuccessRegModal = function () {
         myView.closeSuccessRegModal();
@@ -268,15 +369,10 @@ function myModel() {
                     myView.heyCheater();
                 }
                 gameIsStarted = false;
-                const uid = auth.currentUser.uid;
-                get(child(ref(database), "UsersList/" + uid))
-                    .then(snapshot => {
-                        const user = snapshot.val();
-                        if (user.record < clicks && clicks <= 100) {
-                            user.record = clicks;
-                            update(ref(database, "UsersList/" + uid), user);
-                        }
-                    })
+                if (registeredUser.record < clicks && clicks <= 100) {
+                    registeredUser.record = clicks;
+                    this.sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(registeredUser.record, registeredUser.token));
+                }
             }, timeOut);
         }
     }

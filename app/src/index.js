@@ -18,6 +18,7 @@ import myView from "./view.js";
 import myController from "./controller.js";
 import myModel from "./model.js";
 
+
 const components = {
     header: Header,
     modalAuth: ModalAuth,

@@ -17,7 +17,7 @@ function myController() {
         const hashPageName = location.hash.slice(1).toLowerCase();
 
         // myModel.loadMenu();
-        // myModel.manageUser();
+        myModel.manageUser();
 
         myModel.updateState(hashPageName);
 
@@ -37,6 +37,7 @@ function myController() {
         inputEmail = myContainer.querySelector('.email-input');
         inputPassword = myContainer.querySelector('.input-password');
         inputName = myContainer.querySelector('.name-input');
+
         successRegModal = myContainer.querySelector('.successful-reg-modal');
 
         headerMenu.addEventListener('pointerdown', openHeaderMenu);
@@ -106,15 +107,15 @@ function myController() {
     }
 
     function signIn() {
-        myModel.signIn(inputEmail.value, inputPassword.value);
+        myModel.loginUser(inputEmail.value, inputPassword.value);
     }
 
     function signUp() {
-        myModel.signUp(inputEmail.value, inputPassword.value, inputName.value);
+        myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
     }
 
     function logout() {
-        myModel.logout();
+        myModel.logoutUser();
     }
 
     function closeSuccessRegModal() {

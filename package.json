@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "browser-sync": "^2.27.9",
-    "express": "^4.18.2"
+    "cookie-parser": "^1.4.6",
+    "cookielib": "^1.1.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "content_security_policy": "script-src 'unsafe-inline' 'sha256-AF490//jIflwN/2nTDszvAx/KI2V9GJG8gdwvGhO/zw='",
   "devDependencies": {
