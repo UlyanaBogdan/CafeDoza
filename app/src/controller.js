@@ -13,13 +13,13 @@ function myController() {
     let winBonusModal = null;
 
 
-    function updateState() {
+    async function updateState() {
         const hashPageName = location.hash.slice(1).toLowerCase();
-
         // myModel.loadMenu();
-        myModel.manageUser();
 
         myModel.updateState(hashPageName);
+
+        await myModel.manageUser();
 
 
         headerMenu = myContainer.querySelector('.div-menu');

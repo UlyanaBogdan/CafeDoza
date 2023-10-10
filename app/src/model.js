@@ -59,7 +59,7 @@ function myModel() {
                 if (xhr.status >= 400) {
                     reject(xhr.response);
                 } else {
-                    resolve(JSON.parse(xhr.response));
+                   resolve(JSON.parse(xhr.response));
                 }
             }
 
@@ -87,7 +87,7 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        registeredUser = this.sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(user));
+        registeredUser = this.sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
 
@@ -97,22 +97,30 @@ function myModel() {
             email: email,
             password: password
         }
-        registeredUser = sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(user));
+        registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
-
-    this.getUser = function() {
+    const url = "http://45.82.71.93:8088/get_user";
+    // $.ajax({
+    //     type: 'GET',
+    //     url: url,
+    //     data: {get_param: 'value'},
+    //     dataType: 'json',
+    //     success: function (data) {
+    //         var names = data
+    //         $('#cand').html(data);
+    //     }
+    // });
+    this.getUser = async function () {
         // const token = getCookie('token');
         // if (token != undefined) {
-            registeredUser = this.sendRequest('GET', "http://45.82.71.93:8088/get_user"); //TODO
-            return true;
+        registeredUser = await this.sendRequest('GET', "http://45.82.71.93:8088/get_user");//TODO
         // }
     }
 
-    this.manageUser = function() {
-        if (this.getUser()) {
-            myView.changePageUserIn(registeredUser);
-        }
+    this.manageUser = async function() {
+        await this.getUser();
+        myView.changePageUserIn(registeredUser);
     }
 
     this.logoutUser = function() {
@@ -210,18 +218,6 @@ function myModel() {
     //     });
     // }
 
-    // this.manageUser = function () {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             const uid = auth.currentUser.uid;
-    //             get(child(ref(database), "UsersList/" + uid))
-    //                 .then(snapshot => {
-    //                     const user = snapshot.val();
-    //                     myView.changePageUserIn(user);
-    //                 })
-    //         }
-    //     });
-    // }
 
     // this.setCookie = function (name, value, options = { path: '/' }) {
     //     /*
@@ -271,7 +267,7 @@ function myModel() {
     }
 
     this.checkBonuses = function () {
-        this.sendRequest('GET', baseURL + "/ulyana/check")
+        this.sendRequest('GET', url)
             .then(user => myView.showBonuses(user))
             .catch(err => console.log(err));
     }
@@ -365,13 +361,13 @@ function myModel() {
             setTimeout(() => {
                 clearInterval(interval);
                 myView.endGame();
-                if (clicks > 100) {
+                if (clicks > 300) {
                     myView.heyCheater();
                 }
                 gameIsStarted = false;
                 if (registeredUser.record < clicks && clicks <= 100) {
                     registeredUser.record = clicks;
-                    this.sendRequest('POST', baseURL + "/ulyana/check", JSON.stringify(registeredUser.record, registeredUser.token));
+                    this.sendRequest('POST', baseURL + "/ulyana/check", registeredUser.record, registeredUser.token);
                 }
             }, timeOut);
         }

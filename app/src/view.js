@@ -215,21 +215,23 @@ function myView() {
             const bonusText = myContainer.querySelector('.bonuses-greeting');
             bonusText.innerText = `Check your bonuses, ${user.name}!`;
             const bonusNumber = myContainer.querySelector('.bonus-number');
-            bonusNumber.innerText = user.bonuses;
+            bonusNumber.innerText = user.gifts;
+            const qr = myContainer.querySelector('.qr-user');
+            const openQr = myContainer.querySelector('.open-qr-user');
+            qr.setAttribute('src', `${user.qrUrl}`);
+            openQr.setAttribute('src', `${user.qrUrl}`);
         }
+        myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');
-        this.clearInputs();
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
-        const qr = myContainer.querySelector('.qr-user');
-        qr.setAttribute('src', `${user.qrUrl}`);
     }
 
     this.showBonuses = function (user) {
         const bonusText = myContainer.querySelector('.bonuses-greeting');
         const progressBar = myContainer.querySelector('.cup-progress');
-        const userProgress = user.bonuses / 10 * 100;
-        bonusText.innerHTML = `You have ${user.bonuses}/10 cups♥`;
+        const userProgress = user.cups / 10 * 100;
+        bonusText.innerHTML = `You have ${user.cups}/10 cups♥`;
         progressBar.animate(
             [
                 {width: "0"},
@@ -257,7 +259,7 @@ function myView() {
     this.showWinBonusModal = function (user) {
         const winBonusModal = myContainer.querySelector('.modal-congratulations');
         const bonusNumber = myContainer.querySelector('.bonus-number');
-        bonusNumber.innerText = user.winCups;
+        bonusNumber.innerText = user.gifts;
         winBonusModal.classList.remove('closed');
         setTimeout(() => {winBonusModal.classList.add('closed');}, 3000);
         this.showBonuses(user);

@@ -18,8 +18,8 @@ const Progress = {
 <!--            </div>-->
             <h2 class="bonuses-greeting animate__animated animate__pulse animate__slow lng">My Bonuses</h2>
 <!--            <button class="check-bonuses-btn lng">Check bonuses!</button>-->
-            <div class="QR-block"><img class="qr-user" src="./img/code.jpg" width="150"></div>
-            <div class="QR-open closed wow animate__zoomIn"><img src="./img/code.jpg" width="600"></div>
+            <div class="QR-block"><img class="qr-user" src="" width="150"></div>
+            <div class="QR-open closed wow animate__zoomIn"><img class="open-qr-user" src="" width="600"></div>
             <div class="progress-bar"><span class="cup-progress"></span></div>
             <div class="have-bonuses animate__animated animate__pulse animate__slow animate__infinite">
                 <img class="bonus-number-img" src="./img/gift.svg">
