@@ -959,13 +959,40 @@ h2 {
     }
     #reader {
         width: 600px;
+        position: fixed;
+        top: 50%;
+        left: 0;
     }
-    #result {
-        text-align: center;
-        font-size: 1.5rem;
+    .addbtn-admin {
+        width: 150px;
+        height: 80px;
+        background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        margin: 30px;
+        border-radius: 25px;
+    }
+    .removebtn-admin {
+        width: 150px;
+        height: 80px;
+        background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        border-radius: 25px;
+    }
+    .qr-scan-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .admin-cabinet {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         background: url("./img/adminwallp.jpg") no-repeat -650px;
@@ -973,6 +1000,24 @@ h2 {
         height: 90vh;
     }
 
+    .input-admin {
+        font-size: 30px;
+        width: 200px;
+        border-radius: 15px;
+    }
+    .inputblock-admin {
+        position: relative;
+    }
+    .add-cups {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 10px;
+    }
+    .remove-cups {
+        position: absolute;
+
+    }
     .scan-qr-btn {
         width: 500px;
         height: 500px;

@@ -245,6 +245,13 @@ function myView() {
         );
     }
 
+    this.openAdminBtns = function() {
+        const scanQRBtn = myContainer.querySelector('#scan-qr-btn');
+        scanQRBtn.classList.add('closed');
+        const adminButtons = myContainer.querySelector('#buttons-admin');
+        adminButtons.classList.remove('closed');
+    }
+
     this.clearCodeInput = function () {
         myContainer.querySelector('.code-input').value = "";
     }

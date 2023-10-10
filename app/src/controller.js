@@ -58,6 +58,10 @@ function myController() {
             //     searchDrink();
             // });
         }
+        if (hashPageName === "adminpage") {
+            const scanBtn = myContainer.querySelector('#scan-qr-btn');
+            scanBtn.addEventListener('pointerdown', scanQR);
+        }
 
         if (hashPageName === "bonuses") {
             // const checkBonusesBtn = myContainer.querySelector('.check-bonuses-btn');
@@ -78,6 +82,10 @@ function myController() {
             openQR.addEventListener('pointerdown', closeCode);
         }
 
+    }
+
+    function scanQR() {
+        myModel.scannerQR();
     }
 
     function openHeaderMenu() {

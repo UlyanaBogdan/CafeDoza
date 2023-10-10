@@ -100,7 +100,7 @@ function myModel() {
         registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
-    const url = "http://172.17.0.1:8088/get_user";
+    const url = "http://45.82.71.93:8088/get_user";
     // $.ajax({
     //     type: 'GET',
     //     url: url,
@@ -323,20 +323,30 @@ function myModel() {
         myView.closeCode();
     }
 
-    // const scanner = new Html5QrcodeScanner('reader', {
-    //     qrbox: {
-    //         width: 250,
-    //         height: 250,
-    //     },
-    //     fps: 20,
-    // });
-    //
-    //
-    // scanner.render(success, error);
-    //
-    // function success(result) {
-    //     myView.showResult(result, this.scanner);
-    // }
+    let scannedUser = null;
+    this.scannerQR = function() {
+        const html5QrCode = new Html5Qrcode("reader");
+        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            html5QrCode.stop().then((ignore) => {
+                // QR Code scanning is stopped.
+            }).catch((err) => {
+                // Stop failed, handle it.
+            });
+            this.sendRequest('POST', baseURL + "", decodedText)
+                .then(scannedUser => myView.openAdminBtns)
+                .catch(err => alert("User is not found"));
+        };
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+// If you want to prefer back camera
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+//
+// // Select front camera or fail with `OverconstrainedError`.
+//         html5QrCode.start({ facingMode: { exact: "user"} }, config, qrCodeSuccessCallback);
+//
+// // Select back camera or fail with `OverconstrainedError`.
+//         html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    }
+
 
 
     this.formatTime = function (ms) {
