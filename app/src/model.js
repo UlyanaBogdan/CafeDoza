@@ -100,7 +100,7 @@ function myModel() {
         registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
-    const url = "http://45.82.71.93:8088/get_user";
+    const url = "http://172.17.0.1:8088/get_user";
     // $.ajax({
     //     type: 'GET',
     //     url: url,
@@ -114,7 +114,7 @@ function myModel() {
     this.getUser = async function () {
         // const token = getCookie('token');
         // if (token != undefined) {
-        registeredUser = await this.sendRequest('GET', "http://45.82.71.93:8088/get_user");//TODO
+        registeredUser = await this.sendRequest('GET', url);//TODO
         // }
     }
 
