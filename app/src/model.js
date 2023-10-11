@@ -52,6 +52,7 @@ function myModel() {
 
             xhr.open(method, url);
             xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.setRequestHeader('Upgrade-Insecure-Requests', '1')
 
             xhr.onload = () => {
                 if (xhr.status >= 400) {
