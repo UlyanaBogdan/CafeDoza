@@ -23,6 +23,7 @@ function myView() {
     let successRegModal = null;
     let searchInput = null;
     let myBonusesMenu = null;
+    let bonusText = null;
 
     this.init = function (container, routes) {
         myContainer = container;
@@ -232,7 +233,7 @@ function myView() {
         console.log(user);
         const hashPageName = location.hash.slice(1).toLowerCase();
         if (hashPageName === "bonuses") {
-            const bonusText = myContainer.querySelector('.bonuses-greeting');
+            bonusText = myContainer.querySelector('.bonuses-greeting');
             console.log(bonusText);
             bonusText.textContent = `Check your bonuses, ${user.name}!`;
             const bonusNumber = myContainer.querySelector('.bonus-number');
