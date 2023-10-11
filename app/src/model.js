@@ -6,6 +6,7 @@ function myModel() {
     let timeOut = 5000;
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
+    const regURL = getUrls.regURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -97,10 +98,12 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        this.sendRequest('POST', baseURL + "/ulyana/check", user)
-            .then(registeredUser => myView.successReg(scannedUser))
+        this.sendRequest('POST', baseURL + regURL, user)
+            .then(registeredUser => {
+                myView.successReg(scannedUser);
+                setCookie('token', registeredUser.token);
+            })
             .catch(err => myView.error("something went wrong"));
-        setCookie('token', registeredUser.token);
     }
 
     this.loginUser = function(email, password) {
@@ -110,9 +113,11 @@ function myModel() {
             password: password
         }
         this.sendRequest('POST', baseURL + "/check_token", "65749302043")
-            .then(registeredUser => myView.successLog(scannedUser))
+            .then(registeredUser => {
+                myView.successLog(scannedUser);
+                setCookie('token', registeredUser.token);
+            })
             .catch(err => myView.error("user not found"));
-        setCookie('token', registeredUser.token);
     }
 
     this.getUser = async function () {
