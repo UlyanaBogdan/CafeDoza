@@ -219,15 +219,16 @@ body {
 
 .index-coffee {
     width: 100%;
-    min-height: 100vh;
+    height: 120vh;
     position: absolute;
+    object-fit: cover;
     top: 0;
     left: 0;
     z-index: -1;
     object-fit: cover;
 }
 .main h2 {
-    padding-top: 130px;
+    padding: 80px 0 250px;
     color: white;
     text-shadow: 2px 2px 2px rgba(213, 134, 134, 0.6);
 }
@@ -235,7 +236,8 @@ body {
 h2 {
     font-size: 80px;
     text-align: center;
-    color: rgba(213, 134, 134, 0.6);
+    color: white;
+    text-shadow: 2px 2px 2px rgba(213, 134, 134, 0.6);
     max-width: 90%;
     margin: auto;
 }
@@ -853,7 +855,7 @@ h2 {
 }
 .game h2 {
     color: white;
-    margin: 0;
+    margin: 0
 }
 
 .game-header,
@@ -956,10 +958,10 @@ h2 {
     left: 0;
 }
 .addbtn-admin {
-    color: white;
+    color: #e89391;
     width: 150px;
     height: 80px;
-    background-color: #ffc7a7;
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -987,7 +989,7 @@ h2 {
     color: darkred;
     width: 150px;
     height: 80px;
-    background-color: #fdc6a6;
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1006,7 +1008,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("./img/adminwallp.jpg") no-repeat;
+    background: url("./img/adminpage.jpg") no-repeat;
     background-size: cover;
     height: 90vh;
 }
@@ -1019,7 +1021,7 @@ h2 {
     border-radius: 15px;
     outline: none;
     border: none;
-
+    color: #e89391;
 }
 .input-admin::-webkit-outer-spin-button,
 .input-admin::-webkit-inner-spin-button {
@@ -1034,9 +1036,10 @@ h2 {
 }
 
 .add-cups {
-    border-radius: 7px;
+    box-shadow: 0 0 7px 1.5px #ffcccc;
+    border-radius: 8px;
+    background: none;
     font-weight: bold;
-    background: #ffd4bb;
     outline: none;
     border: none;
     width: 30px;
@@ -1046,8 +1049,9 @@ h2 {
     right: 10px;
 }
 .remove-cups {
-    border-radius: 7px;
-    background: #ffd4bb;
+    box-shadow: 0 0 7px 1.5px #ffcccc;
+    background: none;
+    border-radius: 8px;
     outline: none;
     border: none;
     font-weight: bold;
@@ -1063,12 +1067,13 @@ h2 {
     outline: none;
     border: none;
     border-radius: 40px;
-    text-shadow: 4px 3px 4px black;
-    color: white;
+    text-shadow: 4px 3px 4px #ffffff;
+    color: #d28685;
     background: rgba(255, 255, 255, 0.5);
     font-weight: bold;
     font-size: 3em;
     cursor: pointer;
+    box-shadow: 0 0 30px 2px #ffffff;
 }
 
 .search-btn img {
@@ -1077,13 +1082,15 @@ h2 {
 }
 .my-cabinet {
     min-height: 100vh;
+    padding-top: 100px;
 }
-.code-input,
 .bonuses-greeting,
-.check-bonuses-btn,
 .progress-bar,
 .have-bonuses {
     margin: 60px 0;
+}
+.bonuses-greeting {
+    margin-top: 100px
 }
 .check-bonuses-btn {
     font-size: 1.9em;
@@ -1143,8 +1150,7 @@ h2 {
 
 @media (max-width: 768px ) {
     .main h2 {
-        font-size: 3.2em;
-        margin-top: 0;
+        font-size: 3.9em;
     }
     .main {
         height: 100vh;
@@ -1152,7 +1158,7 @@ h2 {
         justify-content: space-around;
     }
     .main-description {
-        font-size: 2em;
+        font-size: 2.5em;
         max-width: 90%;
         width: 100%;
         margin: auto;
@@ -1208,6 +1214,9 @@ h2 {
 }
 
 @media (max-width: 576px ) {
+    .main-description {
+        padding-bottom: 40px;
+    }
     .shop-name img {
         width: 30px;
         height: 30px;
@@ -1220,18 +1229,77 @@ h2 {
         height: 200px;
     }
     .bonuses-greeting {
-        font-size: 12vw;
+        font-size: 2.5em;
     }
     .menu-section h2 {
         font-size: 10vw;
     }
+    .progress-bar {
+        width: 250px;
+        height: 60px;
+        border-radius: 15px;
+        border-width: 3.5px;
+    }
+    .cup-progress {
+        border-radius: 14px;
+    }
+    .have-bonuses {
+        width: 150px;
+        height: 70px;
+        font-size: 2em;
+    }
+    .have-bonuses img {
+        width: 40px;
+    }
 }
 @media (max-width: 480px) {
+    .click-btn {
+        width: 200px;
+    }
+    .main-description {
+        padding-bottom: 0;
+    }
+    .main h2{
+        font-size: 2.5em;
+        padding-top: 60px;
+    }
+    .main-description {
+        font-size: 1.8em;
+        margin-top: -50px;
+    }
     .location p {
         font-size: 0.8em;
     }
     .location {
         min-height: 250px;
         height: 300px;
+    }
+    .game {
+        user-select: none;
+    }
+    .game h2 {
+        font-size: 2.2em;
+    }
+
+    .game-header,
+    .clicks {
+        font-size: 2.5em;
+    }
+
+    .clicks {
+        color: #ffffff;
+    }
+
+    .click-btn {
+        border-radius: 1000px;
+        position: relative;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        width: 400px;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        -webkit-tap-highlight-color: transparent;
+        /*box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.15);*/
     }
 }
