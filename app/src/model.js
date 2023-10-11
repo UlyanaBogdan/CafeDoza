@@ -100,7 +100,7 @@ function myModel() {
          */
         this.sendRequest('POST', baseURL + regURL, user)
             .then(registeredUser => {
-                myView.successReg(scannedUser);
+                myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("something went wrong"));
@@ -114,7 +114,7 @@ function myModel() {
         }
         this.sendRequest('POST', baseURL + "/check_token", "65749302043")
             .then(registeredUser => {
-                myView.successLog(scannedUser);
+                myView.successLog(registeredUser);
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("user not found"));

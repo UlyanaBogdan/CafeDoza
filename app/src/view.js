@@ -170,8 +170,8 @@ function myView() {
         this.clearInputs();
         authModal.classList.add('closed');
         modalOverlay.classList.add('closed');
-        this.changePageUserIn(user);
         window.location.hash = "#bonuses";
+        this.changePageUserIn(user);
     }
 
     this.logout = function () {
