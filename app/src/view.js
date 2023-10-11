@@ -238,12 +238,12 @@ function myView() {
             const openQr = myContainer.querySelector('.open-qr-user');
             qr.setAttribute('src', `${user.qrUrl}`);
             openQr.setAttribute('src', `${user.qrUrl}`);
+            this.showBonuses(user);
         }
         myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
-        this.showBonuses(user);
     }
 
     this.showBonuses = function (user) {
