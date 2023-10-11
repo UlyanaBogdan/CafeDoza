@@ -247,7 +247,10 @@ function myModel() {
     }
 
     this.showsomething = function() {
-        this.sendRequest('POST', baseURL + "/check_token", "65749302043")
+        const token = {
+            token: "65749302043"
+        }
+        this.sendRequest('POST', baseURL + "/check_json_token", token)
             .then(scannedUser => console.log(scannedUser))
             .catch(err => alert("User is not found"));
     }
