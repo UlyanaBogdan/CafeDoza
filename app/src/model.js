@@ -1,28 +1,4 @@
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-// import { getDatabase, ref, set, push, child, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-// import {
-//     getAuth,
-//     createUserWithEmailAndPassword,
-//     signInWithEmailAndPassword,
-//     onAuthStateChanged,
-//     signOut
-// } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
-
 import {getUrls} from "./config.js";
-
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDFgq_UWYWiocaTjAnEr8VH22RLEZFHKZ0",
-//     authDomain: "coffeedoza-73a9f.firebaseapp.com",
-//     projectId: "coffeedoza-73a9f",
-//     storageBucket: "coffeedoza-73a9f.appspot.com",
-//     messagingSenderId: "606035213686",
-//     appId: "1:606035213686:web:27f59fd0a89fb457418e57",
-//     databaseURL: "https://coffeedoza-73a9f-default-rtdb.europe-west1.firebasedatabase.app"
-// };
-
-// const app = initializeApp(firebaseConfig);
-// const database = getDatabase(app);
-// const auth = getAuth();
 
 function myModel() {
     let myView = null;
@@ -31,6 +7,8 @@ function myModel() {
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
     let registeredUser = null;
+    const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    const PASS_REGEXP = /^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})$/iu;
 
     this.init = function (view) {
         myView = view;
@@ -38,6 +16,26 @@ function myModel() {
 
     this.updateState = function (hashPageName) {
         myView.renderContent(hashPageName);
+    }
+
+    this.isEmailValid = function (email) {
+        return EMAIL_REGEXP.test(email);
+    }
+
+    this.isPasswordValid = function(password) {
+        return PASS_REGEXP.text(password);
+    }
+
+    this.checkEmail = function (email) {
+        if (!this.isEmailValid(email)) {
+            myView.invalidEmail();
+        }
+    }
+
+    this.checkPassword = function (password) {
+        if (!this.isPasswordValid(password)) {
+            myView.invalidPassword();
+        }
     }
 
     this.loadMenu = async function () {
@@ -101,16 +99,7 @@ function myModel() {
         setCookie('token', registeredUser.token);
     }
     const url = "http://45.82.71.93:8088/get_user";
-    // $.ajax({
-    //     type: 'GET',
-    //     url: url,
-    //     data: {get_param: 'value'},
-    //     dataType: 'json',
-    //     success: function (data) {
-    //         var names = data
-    //         $('#cand').html(data);
-    //     }
-    // });
+
     this.getUser = async function () {
         // const token = getCookie('token');
         // if (token != undefined) {
@@ -138,15 +127,6 @@ function myModel() {
         let coks = getCookie('token');
         console.log(coks);
     }
-
-
-    // this.sendRequest('GET', baseURL + "/ulyana/check")
-    //     .then(user => console.log(user))
-    //     .catch(err => console.log(err));
-    //
-    // this.sendRequest('GET', baseURL + "/ulyana/check")
-    //     .then(user => myView.addBack(user))
-    //     .catch(err => console.log(err));
 
     this.openHeaderMenu = function (state) {
         if (state === "closed") {
@@ -266,6 +246,12 @@ function myModel() {
         myView.clearSearchInput();
     }
 
+    this.showsomething = function() {
+        this.sendRequest('POST', baseURL + "/check_token", "65749302043")
+            .then(scannedUser => console.log(scannedUser))
+            .catch(err => alert("User is not found"));
+    }
+
     this.checkBonuses = function () {
         this.sendRequest('GET', url)
             .then(user => myView.showBonuses(user))
@@ -329,6 +315,7 @@ function myModel() {
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             html5QrCode.stop().then((ignore) => {
                 // QR Code scanning is stopped.
+                console.log(decodedText)
             }).catch((err) => {
                 // Stop failed, handle it.
             });

@@ -902,7 +902,138 @@ h2 {
     height: 100%;
     object-fit: cover;
 }
+.code-input {
+    width: 300px;
+    height: 80px;
+    font-size: 2em;
+    padding-right: 55px;
+}
+.search-btn {
+    right: 5px;
+    top: 78px;
+}
 
+.code {
+    position: relative;
+}
+.QR-block {
+    cursor: pointer;
+}
+.QR-open {
+    position: fixed;
+    z-index: 5;
+    top: calc((100vh - 550px)/2);
+}
+#reader {
+    width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 0;
+}
+.addbtn-admin {
+    width: 150px;
+    height: 80px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    margin: 30px;
+    border-radius: 25px;
+}
+.removebtn-admin {
+    width: 150px;
+    height: 80px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    border-radius: 25px;
+}
+.qr-scan-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.admin-cabinet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("./img/adminwallp.jpg") no-repeat -650px;
+    background-size: cover;
+    height: 90vh;
+}
+
+.input-admin {
+    font-size: 30px;
+    width: 200px;
+    border-radius: 15px;
+}
+.inputblock-admin {
+    position: relative;
+}
+.add-cups {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+}
+.remove-cups {
+    position: absolute;
+
+}
+.scan-qr-btn {
+    width: 500px;
+    height: 500px;
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    text-shadow: 4px 3px 4px black;
+    color: white;
+    background: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    font-size: 3em;
+    cursor: pointer;
+}
+
+.search-btn img {
+    width: 40px;
+    height: 40px;
+}
+.my-cabinet {
+    min-height: 100vh;
+}
+.code-input,
+.bonuses-greeting,
+.check-bonuses-btn,
+.progress-bar,
+.have-bonuses {
+    margin: 60px 0;
+}
+.check-bonuses-btn {
+    font-size: 1.9em;
+    width: 350px;
+    height: 80px;
+}
+.progress-bar {
+    width: 55%;
+    height: 80px;
+    border-radius: 25px;
+}
+.cup-progress {
+    border-radius: 19px;
+}
+.have-bonuses {
+    width: 200px;
+    height: 100px;
+    font-size: 3em;
+}
+.have-bonuses img {
+    width: 60px;
+}
 
 @media (max-width: 992px ) {
     .footer {
@@ -935,138 +1066,7 @@ h2 {
     .maps {
         min-height: auto;
     }
-    .code-input {
-        width: 300px;
-        height: 80px;
-        font-size: 2em;
-        padding-right: 55px;
-    }
-    .search-btn {
-        right: 5px;
-        top: 78px;
-    }
-    
-    .code {
-        position: relative;
-    }
-    .QR-block {
-        cursor: pointer;
-    }
-    .QR-open {
-        position: fixed;
-        z-index: 5;
-        top: calc((100vh - 550px)/2);
-    }
-    #reader {
-        width: 600px;
-        position: fixed;
-        top: 50%;
-        left: 0;
-    }
-    .addbtn-admin {
-        width: 150px;
-        height: 80px;
-        background-color: red;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2em;
-        margin: 30px;
-        border-radius: 25px;
-    }
-    .removebtn-admin {
-        width: 150px;
-        height: 80px;
-        background-color: red;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2em;
-        border-radius: 25px;
-    }
-    .qr-scan-block {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .admin-cabinet {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: url("./img/adminwallp.jpg") no-repeat -650px;
-        background-size: cover;
-        height: 90vh;
-    }
 
-    .input-admin {
-        font-size: 30px;
-        width: 200px;
-        border-radius: 15px;
-    }
-    .inputblock-admin {
-        position: relative;
-    }
-    .add-cups {
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        top: 10px;
-    }
-    .remove-cups {
-        position: absolute;
-
-    }
-    .scan-qr-btn {
-        width: 500px;
-        height: 500px;
-        outline: none;
-        border: none;
-        border-radius: 100px;
-        text-shadow: 4px 3px 4px black;
-        color: white;
-        background: rgba(255, 255, 255, 0.5);
-        font-weight: bold;
-        font-size: 3em;
-        cursor: pointer;
-    }
-
-    .search-btn img {
-        width: 40px;
-        height: 40px;
-    }
-    .my-cabinet {
-        min-height: 100vh;
-    }
-    .code-input,
-    .bonuses-greeting,
-    .check-bonuses-btn,
-    .progress-bar,
-    .have-bonuses {
-        margin: 60px 0;
-    }
-    .check-bonuses-btn {
-        font-size: 1.9em;
-        width: 350px;
-        height: 80px;
-    }
-    .progress-bar {
-        width: 55%;
-        height: 80px;
-        border-radius: 25px;
-    }
-    .cup-progress {
-        border-radius: 19px;
-    }
-    .have-bonuses {
-        width: 200px;
-        height: 100px;
-        font-size: 3em;
-    }
-    .have-bonuses img {
-        width: 60px;
-    }
 }
 
 @media (max-width: 768px ) {

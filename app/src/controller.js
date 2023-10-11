@@ -19,7 +19,8 @@ function myController() {
 
         myModel.updateState(hashPageName);
 
-        await myModel.manageUser();
+        // await myModel.manageUser();
+        await myModel.showsomething();
 
 
         headerMenu = myContainer.querySelector('.div-menu');
@@ -35,8 +36,14 @@ function myController() {
         let clearSearchBtn = myContainer.querySelector('.clear-search-btn');
 
         inputEmail = myContainer.querySelector('.email-input');
+        inputEmail.addEventListener('input', checkEmail);
+
         inputPassword = myContainer.querySelector('.input-password');
+        inputPassword.addEventListener('input', checkPassword);
+
         inputName = myContainer.querySelector('.name-input');
+
+
 
         successRegModal = myContainer.querySelector('.successful-reg-modal');
 
@@ -164,6 +171,14 @@ function myController() {
 
     function closeCode() {
         myModel.closeCode();
+    }
+
+    function checkEmail() {
+        myModel.checkEmail(inputEmail.value);
+    }
+
+    function checkPassword() {
+        myModel.checkPassword(inputPassword.value);
     }
 
     return {
