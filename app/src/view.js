@@ -229,6 +229,7 @@ function myView() {
     }
 
     this.changePageUserIn = function (user) {
+        console.log("меняю");
         const hashPageName = location.hash.slice(1).toLowerCase();
         if (hashPageName === "bonuses") {
             const bonusText = myContainer.querySelector('.bonuses-greeting');

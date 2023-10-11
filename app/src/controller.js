@@ -88,7 +88,7 @@ function myController() {
             // searchCodeInput = myContainer.querySelector('.code-input');
             // const searchCodeBtn = myContainer.querySelector('.search-btn');
             // searchCodeBtn.addEventListener('pointerdown', searchCode);
-            checkBonuses();
+            // checkBonuses();
             plusOneModal = myContainer.querySelector('.modal-coffee');
             winBonusModal = myContainer.querySelector('.modal-congratulations');
             plusOneModal.addEventListener('pointerdown', closePlusOneModal);
