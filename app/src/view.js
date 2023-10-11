@@ -264,11 +264,24 @@ function myView() {
         );
     }
 
-    this.openAdminBtns = function() {
+    this.openAdminBtns = function(user) {
+        const inputDiv = myContainer.querySelector('inputblock-admin');
+        inputDiv.classList.remove('closed');
         const scanQRBtn = myContainer.querySelector('#scan-qr-btn');
         scanQRBtn.classList.add('closed');
         const adminButtons = myContainer.querySelector('#buttons-admin');
         adminButtons.classList.remove('closed');
+        const userGiftsAdmin = myContainer.querySelector('.userGiftsForAdmin');
+        userGiftsAdmin.textContent = `${user.name} has ${user.gifts} gifts`;
+    }
+
+    this.closeAdminBtns = function () {
+        const scanQRBtn = myContainer.querySelector('#scan-qr-btn');
+        scanQRBtn.classList.remove('closed');
+        const adminButtons = myContainer.querySelector('#buttons-admin');
+        adminButtons.classList.add('closed');
+        const userGiftsAdmin = myContainer.querySelector('.userGiftsForAdmin');
+        userGiftsAdmin.textContent = "";
     }
 
     this.clearCodeInput = function () {
@@ -346,6 +359,16 @@ function myView() {
         const p = document.createElement('p');
         p.textContent = user.name;
         footer.append(p);
+    }
+
+    this.plusCupInput = function (value) {
+        const input = myContainer.querySelector('.input-admin');
+        input.value = value;
+    }
+
+    this.minusCupInput = function (value) {
+        const input = myContainer.querySelector('.input-admin');
+        input.value = value;
     }
 
     this.openCode = function () {

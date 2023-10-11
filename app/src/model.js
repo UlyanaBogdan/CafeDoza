@@ -163,8 +163,20 @@ function myModel() {
         myView.changeToReg();
     }
 
-    this.changeToLog = function () {
+    this.changeToLog = function (value) {
         myView.changeToLog();
+    }
+
+    this.plusCupInput = function (value) {
+        value += 1;
+        myView.plusCupInput(value);
+    }
+
+    this.minusCupInput = function (value) {
+        if (value > 1) {
+            value -= 1;
+            myView.minusCupInput(value);
+        }
     }
 
     // this.signIn = function (email, password) {
@@ -338,7 +350,7 @@ function myModel() {
                 // Stop failed, handle it.
             });
             this.sendRequest('POST', baseURL + "", decodedText)
-                .then(scannedUser => myView.openAdminBtns)
+                .then(scannedUser => myView.openAdminBtns(scannedUser))
                 .catch(err => alert("User is not found"));
         };
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
@@ -352,7 +364,20 @@ function myModel() {
 //         html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
     }
 
+    this.addCupsAdmin = function () {
+        const newCups = Number(scannedUser.cups) + 1;
+        this.sendRequest('POST', baseURL + "", newCups)
+            .then(scannedUser => myView.closeAdminBtns())
+            .catch(err => alert("User is not found"));
+    }
 
+    this.removeCupsAdmin = function () {
+        const newGifts = Number(scannedUser.gifts) - 1;
+        this.sendRequest('POST', baseURL + "", newGifts)
+            .then(scannedUser => myView.closeAdminBtns())
+            .catch(err => alert("User is not found"));
+
+    }
 
     this.formatTime = function (ms) {
         return Number.parseFloat(ms / 1000).toFixed(2);

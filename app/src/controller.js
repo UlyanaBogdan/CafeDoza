@@ -13,6 +13,7 @@ function myController() {
     let winBonusModal = null;
     let signInBtn = null;
     let signUpBtn = null;
+    let adminInput = null;
 
 
     async function updateState() {
@@ -70,6 +71,15 @@ function myController() {
         if (hashPageName === "adminpage") {
             const scanBtn = myContainer.querySelector('#scan-qr-btn');
             scanBtn.addEventListener('pointerdown', scanQR);
+            const addCupsBtn = myContainer.querySelector('.add-cups');
+            const removeCupsBtn = myContainer.querySelector('.remove-cups');
+            addCupsBtn.addEventListener('pointerdown', plusCupInput);
+            removeCupsBtn.addEventListener('pointerdown', minusCupInput);
+            adminInput = myContainer.querySelector('.input-admin');
+            const addCupsToUserBtn = myContainer.querySelector('#addbtn-admin');
+            const removeCupsFromUserBtn = myContainer.querySelector('#removebtn-admin');
+            addCupsToUserBtn.addEventListener('pointerdown', addCupsAdmin);
+            removeCupsFromUserBtn.addEventListener('pointerdown', removeCupsAdmin);
         }
 
         if (hashPageName === "bonuses") {
@@ -91,6 +101,22 @@ function myController() {
             openQR.addEventListener('pointerdown', closeCode);
         }
 
+    }
+
+    function addCupsAdmin() {
+        myModel.addCupsAdmin();
+    }
+
+    function removeCupsAdmin() {
+        myModel.removeCupsAdmin();
+    }
+
+    function plusCupInput() {
+        myModel.plusCupInput(Number(adminInput.value));
+    }
+
+    function minusCupInput() {
+        myModel.minusCupInput(Number(adminInput.value));
     }
 
     function scanQR() {
