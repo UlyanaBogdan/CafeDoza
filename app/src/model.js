@@ -123,7 +123,7 @@ function myModel() {
     this.getUser = async function () {
         // const token = getCookie('token');
         // if (token != undefined) {
-        registeredUser = await this.sendRequest('GET', url);//TODO
+        registeredUser = await this.sendRequest('GET', baseURL + "/get_user");//TODO
         // }
     }
 
