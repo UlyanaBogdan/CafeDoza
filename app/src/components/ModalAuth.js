@@ -8,8 +8,9 @@ const ModalAuth = {
           <h3 class="hi-again-text lng">Hi again!</h3>
           <input type="text" class="name-input reg-part closed" placeholder="Name" autocomplete="on">
           <input type="email" class="email-input" placeholder="Email" autocomplete="on" autofocus>
+          <div class="error-email"></div>
           <input type="password" class="input-password" placeholder="Password">
-          <div class="error-auth"></div>
+          <div class="error-password"></div>
           <button type="button" class="reg-btn reg-part closed lng">sign up</button>
           <button type="button" class="log-btn log-part lng">sign in</button>
           <button type="button" class="have-acc reg-part closed lng">Already have an account?</button>

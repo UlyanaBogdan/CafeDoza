@@ -11,6 +11,8 @@ function myController() {
     let searchCodeInput = null;
     let plusOneModal = null;
     let winBonusModal = null;
+    let signInBtn = null;
+    let signUpBtn = null;
 
 
     async function updateState() {
@@ -20,7 +22,7 @@ function myController() {
         myModel.updateState(hashPageName);
 
         // await myModel.manageUser();
-        await myModel.showsomething();
+        // await myModel.showsomething();
 
 
         headerMenu = myContainer.querySelector('.div-menu');
@@ -30,8 +32,8 @@ function myController() {
 
         let changeToRegBtn = myContainer.querySelector('.new-here');
         let changeToLogBtn = myContainer.querySelector('.have-acc');
-        let signInBtn = myContainer.querySelector('.log-btn');
-        let signUpBtn = myContainer.querySelector('.reg-btn');
+        signInBtn = myContainer.querySelector('.log-btn');
+        signUpBtn = myContainer.querySelector('.reg-btn');
         let signOutBtn = myContainer.querySelector('.logout-btn');
         let clearSearchBtn = myContainer.querySelector('.clear-search-btn');
 
@@ -52,9 +54,9 @@ function myController() {
         closeAuthModalBtn.addEventListener('pointerdown', closeAuthModal);
         changeToRegBtn.addEventListener('pointerdown', changeToReg);
         changeToLogBtn.addEventListener('pointerdown', changeToLog);
-        // signInBtn.addEventListener('pointerdown', signIn);
-        // signUpBtn.addEventListener('pointerdown', signUp);
-        // signOutBtn.addEventListener('pointerdown', logout);
+        signInBtn.addEventListener('pointerdown', signIn);
+        signUpBtn.addEventListener('pointerdown', signUp);
+        signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
 
         if (hashPageName === "drinklist") {
@@ -174,11 +176,15 @@ function myController() {
     }
 
     function checkEmail() {
-        myModel.checkEmail(inputEmail.value);
+        if (signInBtn.classList.contains('closed')) {
+            myModel.checkEmail(inputEmail.value);
+        }
     }
 
     function checkPassword() {
-        myModel.checkPassword(inputPassword.value);
+        if (signInBtn.classList.contains('closed')) {
+            myModel.checkPassword(inputPassword.value);
+        }
     }
 
     return {

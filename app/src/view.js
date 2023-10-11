@@ -85,7 +85,27 @@ function myView() {
         inputPassword.value = "";
         inputEmail.value = "";
         inputName.value = "";
-        errorDiv.innerHTML = "";
+        this.closeEmailErr();
+        this.closePassErr();
+    }
+
+    this.invalidEmail = function () {
+        const errorDiv = myContainer.querySelector('.error-email');
+        errorDiv.textContent = "Invalid email. Please try again";
+    }
+
+    this.invalidPassword = function () {
+        const errorDiv = myContainer.querySelector('.error-password');
+        errorDiv.textContent = "It must be at least 6 characters long and contain at least one uppercase letter, and one number digit";
+    }
+    this.closePassErr = function () {
+        const errorDiv = myContainer.querySelector('.error-password');
+        errorDiv.textContent = "";
+    }
+
+    this.closeEmailErr = function () {
+        const errorDiv = myContainer.querySelector('.error-email');
+        errorDiv.textContent = "";
     }
 
     this.openHeaderMenu = function () {
@@ -146,11 +166,12 @@ function myView() {
         newHereBtn.classList.remove('closed');
     }
 
-    this.successLog = function () {
+    this.successLog = function (user) {
         this.clearInputs();
         authModal.classList.add('closed');
         modalOverlay.classList.add('closed');
         window.location.hash = "#bonuses";
+        this.changePageUserIn(user);
     }
 
     this.logout = function () {
@@ -160,12 +181,10 @@ function myView() {
         window.location.hash = "#main";
     }
 
-    this.successReg = function () {
-        this.clearInputs();
-        authModal.classList.add('closed');
-        modalOverlay.classList.add('closed');
-        window.location.hash = "#bonuses";
+    this.successReg = function (user) {
+        this.successLog(user);
         successRegModal.classList.remove('closed');
+        setTimeout(() => {successRegModal.classList.add('closed');}, 3000);
     }
 
     this.closeSuccessRegModal = function () {
@@ -281,20 +300,6 @@ function myView() {
         const winBonusModal = myContainer.querySelector('.modal-congratulations');
         winBonusModal.classList.add('closed');
     }
-    this.errorAuth = function (errorCode) {
-        const errorDiv = myContainer.querySelector('.error-auth');
-        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/weak-password') {
-            errorDiv.innerHTML = 'Invalid password. It has to contain 6 symbols';
-        } else if (errorCode === 'auth/missing-password' || errorCode === 'auth/missing-email') {
-            errorDiv.innerHTML = 'Something is missing';
-        } else if (errorCode === 'auth/email-already-in-use') {
-            errorDiv.innerHTML = 'The user is already registrated';
-        } else if (errorCode === 'auth/user-not-found') {
-            errorDiv.innerHTML = 'The user is not found';
-        } else if (errorCode === 'auth/wrong-password') {
-            errorDiv.innerHTML = 'Invalid password. Try again, pls...';
-        }
-    }
 
     this.error = function (errorName) {
         const errorBlock = myContainer.querySelector('.error-modal');
@@ -304,9 +309,12 @@ function myView() {
             errorText.textContent = "Please fill the input";
         } else if (errorName === "code not found") {
             errorText.textContent = "Code is not found";
-        } else  {
+        } else if (errorName === "user not found") {
+            errorText.textContent = "User is not found";
+        } else {
             errorText.textContent = "Error: " + errorName;
         }
+
         setTimeout(() => {errorBlock.classList.add('closed');}, 3000);
     }
 

@@ -8,7 +8,7 @@ function myModel() {
     const baseURL = getUrls.baseURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    const PASS_REGEXP = /^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})$/iu;
+    const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
     this.init = function (view) {
         myView = view;
@@ -23,18 +23,30 @@ function myModel() {
     }
 
     this.isPasswordValid = function(password) {
-        return PASS_REGEXP.text(password);
+        return PASS_REGEXP.test(password);
     }
 
     this.checkEmail = function (email) {
-        if (!this.isEmailValid(email)) {
-            myView.invalidEmail();
+        if (email === "") {
+            myView.closeEmailErr();
+        } else {
+            if (!this.isEmailValid(email)) {
+                myView.invalidEmail();
+            } else if (this.isEmailValid(email)){
+                myView.closeEmailErr();
+            }
         }
     }
 
     this.checkPassword = function (password) {
-        if (!this.isPasswordValid(password)) {
-            myView.invalidPassword();
+        if (password === "") {
+            myView.closePassErr();
+        } else {
+            if (!this.isPasswordValid(password)) {
+                myView.invalidPassword();
+            } else if (this.isPasswordValid(password)){
+                myView.closePassErr();
+            }
         }
     }
 
@@ -85,7 +97,9 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        registeredUser = this.sendRequest('POST', baseURL + "/ulyana/check", user);
+        this.sendRequest('POST', baseURL + "/ulyana/check", user)
+            .then(registeredUser => myView.successReg(scannedUser))
+            .catch(err => myView.error("something went wrong"));
         setCookie('token', registeredUser.token);
     }
 
@@ -95,10 +109,11 @@ function myModel() {
             email: email,
             password: password
         }
-        registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
+        this.sendRequest('POST', baseURL + "/check_token", "65749302043")
+            .then(registeredUser => myView.successLog(scannedUser))
+            .catch(err => myView.error("user not found"));
         setCookie('token', registeredUser.token);
     }
-    const url = "https://woofwoof.space/api/v1/get_user";
 
     this.getUser = async function () {
         // const token = getCookie('token');

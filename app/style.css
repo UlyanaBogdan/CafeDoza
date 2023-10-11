@@ -210,11 +210,26 @@ body {
 }
 
 .main {
-    background: linear-gradient(90deg, rgba(255, 235, 255, 0.6307773109243697) 0%, rgba(255, 221, 212, 0.5747549019607843) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /*background: linear-gradient(90deg, rgba(255, 235, 255, 0.6307773109243697) 0%, rgba(255, 221, 212, 0.5747549019607843) 100%);*/
 }
 
+.index-coffee {
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    object-fit: cover;
+}
 .main h2 {
     padding-top: 130px;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(213, 134, 134, 0.6);
 }
 
 h2 {
@@ -229,9 +244,11 @@ h2 {
     font-size: 42px;
     text-align: center;
     max-width: 60%;
-    padding: 100px 0 20px;
-    margin: auto;
-    color: rgba(213, 134, 134, 0.9);
+    margin:  auto;
+    /*padding-top: 300px;*/
+    /*color: rgba(213, 134, 134, 0.9);*/
+    color: white;
+    text-shadow: 2px 2px 2px rgba(213, 134, 134, 0.6);
 }
 
 .locations {
@@ -262,7 +279,6 @@ h2 {
     background-color: rgba(255, 255, 255, 1);
     border-radius: 25px;
     padding: 30px;
-    margin: 0;
     box-shadow: 0 0 15px 0 rgba(255, 162, 195, 0.4);
 }
 
@@ -721,9 +737,15 @@ h2 {
     border-radius: 15px;
 }
 
-.error-auth {
+.error-email,
+.error-password{
     width: 100%;
-    margin-top: 10px;
+    height: 20px;
+    margin-top: 0;
+}
+.error-password {
+    font-size: 12px;
+    height: 45px;
 }
 .error-modal.closed {
     display: none;
@@ -836,7 +858,9 @@ h2 {
 
 .game-header,
 .clicks {
-    color: black;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 4px 1px 2px rgb(255, 162, 195);
     font-weight: bold;
     font-size: 3em;
     min-height: 2em;
@@ -849,7 +873,7 @@ h2 {
 }
 
 .click-btn {
-    border-radius: 50%;
+    border-radius: 1000px;
     position: relative;
     background: none;
     cursor: pointer;
@@ -858,7 +882,7 @@ h2 {
     width: 400px;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.15);
+    /*box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.15);*/
 }
 
 .click-btn:active {
@@ -927,7 +951,7 @@ h2 {
 #reader {
     width: 600px;
     position: fixed;
-    top: 50%;
+    top: 100px;
     left: 0;
 }
 .addbtn-admin {
@@ -940,6 +964,10 @@ h2 {
     font-size: 2em;
     margin: 30px;
     border-radius: 25px;
+}
+.addbtn-admin.closed,
+.removebtn-admin.closed{
+    display: none;
 }
 .removebtn-admin {
     width: 150px;
@@ -956,13 +984,14 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .admin-cabinet {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("./img/adminwallp.jpg") no-repeat -650px;
+    background: url("./img/adminwallp.jpg") no-repeat;
     background-size: cover;
     height: 90vh;
 }
@@ -1037,7 +1066,7 @@ h2 {
 
 @media (max-width: 992px ) {
     .footer {
-        font-size: 1.8em;
+        font-size: 1.2em;
     }
     .main-description {
         max-width: 90%;
@@ -1071,14 +1100,16 @@ h2 {
 
 @media (max-width: 768px ) {
     .main h2 {
-        font-size: 10vw;
+        font-size: 3.2em;
+        margin-top: 0;
     }
     .main {
         height: 100vh;
         min-height: 100vh;
+        justify-content: space-around;
     }
     .main-description {
-        font-size: 6.5vw;
+        font-size: 2em;
         max-width: 90%;
         width: 100%;
         margin: auto;
@@ -1095,9 +1126,13 @@ h2 {
     .locations h2 {
         font-size: 11vw;
     }
+    .map {
+        width: 70%;
+    }
     .map iframe {
         width: 100%;
         height: 400px;
+        object-fit: cover;
     }
     .progress-bar {
         width: 50%;
@@ -1105,10 +1140,35 @@ h2 {
     .main {
         min-height: 20vh;
     }
+    .navigation-block {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .navigation-block li {
+        text-align: center;
+    }
+    .login-btn,
+    .logout-btn {
+        width: 200px;
+    }
+    .copyright {
+        margin: 15px;
+    }
+    .open-menu.active {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
 }
 
 @media (max-width: 576px ) {
+    .shop-name img {
+        width: 30px;
+        height: 30px;
+    }
     .drink-container {
         width: 100%;
         max-height: 300px;
@@ -1122,5 +1182,13 @@ h2 {
     .menu-section h2 {
         font-size: 10vw;
     }
-
+}
+@media (max-width: 480px) {
+    .location p {
+        font-size: 0.8em;
+    }
+    .location {
+        min-height: 250px;
+        height: 300px;
+    }
 }
