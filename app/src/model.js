@@ -340,18 +340,20 @@ function myModel() {
     }
 
     let scannedUser = null;
+
     this.scannerQR = function() {
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             html5QrCode.stop().then((ignore) => {
                 // QR Code scanning is stopped.
-                console.log(decodedText)
+                console.log(decodedText);
+                this.sendRequest('POST', baseURL + "", decodedText)
+                    .then(scannedUser => myView.openAdminBtns(scannedUser))
+                    .catch(err => alert("User is not found"));
             }).catch((err) => {
                 // Stop failed, handle it.
             });
-            this.sendRequest('POST', baseURL + "", decodedText)
-                .then(scannedUser => myView.openAdminBtns(scannedUser))
-                .catch(err => alert("User is not found"));
+
         };
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 // If you want to prefer back camera

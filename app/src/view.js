@@ -264,6 +264,16 @@ function myView() {
         );
     }
 
+    this.closeScanBtn = function () {
+        const scanBtn = myContainer.querySelector('#scan-qr-btn');
+        scanBtn.classList.add('closed');
+    }
+
+    this.showScanBtn = function () {
+        const scanBtn = myContainer.querySelector('#scan-qr-btn');
+        scanBtn.classList.remove('closed');
+    }
+
     this.openAdminBtns = function(user) {
         const inputDiv = myContainer.querySelector('inputblock-admin');
         inputDiv.classList.remove('closed');
