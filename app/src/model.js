@@ -98,7 +98,7 @@ function myModel() {
         registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
-    const url = "woofwoof.space:8088/api/v1/get_user";
+    const url = "https://woofwoof.space/api/v1/get_user";
 
     this.getUser = async function () {
         // const token = getCookie('token');
