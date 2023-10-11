@@ -248,7 +248,6 @@ function myView() {
 
     this.showBonuses = function (user) {
         const bonusText = myContainer.querySelector('.bonuses-greeting');
-        console.log(bonusText);
         const progressBar = myContainer.querySelector('.cup-progress');
         const userProgress = user.cups / 10 * 100;
         bonusText.innerHTML = `You have ${user.cups}/10 cups♥`;
@@ -392,6 +391,14 @@ function myView() {
         const code = myContainer.querySelector('.QR-open');
         code.classList.add('closed');
         modalOverlay.classList.add('closed');
+    }
+
+    this.hideUser = function () {
+        myBonusesMenu = myContainer.querySelector('.mybonuses');
+        logoutBtn.classList.add('closed');
+        authBtn.classList.remove('closed');
+        myBonusesMenu.classList.add('closed');
+        window.location.hash = "#main";
     }
 }
 

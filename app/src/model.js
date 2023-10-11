@@ -135,7 +135,7 @@ function myModel() {
     this.logoutUser = function() {
         if (this.getUser()) {
             deleteCookie('token');
-            myView.hideUser;
+            myView.hideUser();
         }
     }
 
