@@ -229,12 +229,9 @@ function myView() {
     }
 
     this.changePageUserIn = function (user) {
-        console.log(user);
         const hashPageName = location.hash.slice(1).toLowerCase();
         if (hashPageName === "bonuses") {
             bonusText = myContainer.querySelector('.bonuses-greeting');
-            console.log(bonusText);
-            bonusText.textContent = `Check your bonuses, ${user.name}!`;
             const bonusNumber = myContainer.querySelector('.bonus-number');
             bonusNumber.textContent = user.gifts;
             const qr = myContainer.querySelector('.qr-user');
@@ -246,10 +243,12 @@ function myView() {
         myBonusesMenu.classList.remove('closed');
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
+        this.showBonuses(user);
     }
 
     this.showBonuses = function (user) {
         const bonusText = myContainer.querySelector('.bonuses-greeting');
+        console.log(bonusText);
         const progressBar = myContainer.querySelector('.cup-progress');
         const userProgress = user.cups / 10 * 100;
         bonusText.innerHTML = `You have ${user.cups}/10 cups♥`;
