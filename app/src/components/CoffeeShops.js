@@ -8,7 +8,7 @@ const CoffeeShops = {
                 <img src="./img/coffeshopicon.png">
                 <p class="lng">Cafe Doza</p>
               </div>
-              <img src="./img/coffeeshop3.jpg" class="shop-photo">
+              <img src="https://i.postimg.cc/fWmyYBQq/105-508172547.jpg" class="shop-photo">
               <p class="shop-address lng">Radygiera, 11, Warsaw</p>
             </div>
         </section>

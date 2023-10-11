@@ -1008,7 +1008,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("./img/adminpage.jpg") no-repeat;
+    background: url("https://i.postimg.cc/RZKxDbG2/adminpage.jpg") no-repeat;
     background-size: cover;
     height: 90vh;
 }
@@ -1150,15 +1150,15 @@ h2 {
 
 @media (max-width: 768px ) {
     .main h2 {
-        font-size: 3.9em;
+        font-size: 3.5em;
     }
     .main {
         height: 100vh;
         min-height: 100vh;
-        justify-content: space-around;
+        justify-content: space-between;
     }
     .main-description {
-        font-size: 2.5em;
+        font-size: 2.3em;
         max-width: 90%;
         width: 100%;
         margin: auto;
@@ -1214,6 +1214,10 @@ h2 {
 }
 
 @media (max-width: 576px ) {
+    .main h2 {
+        font-size: 3em;
+        padding-top: 100px;
+    }
     .main-description {
         padding-bottom: 40px;
     }
@@ -1272,7 +1276,9 @@ h2 {
     }
     .location {
         min-height: 250px;
-        height: 300px;
+    }
+    .shop-photo {
+        height: 200px;
     }
     .game {
         user-select: none;

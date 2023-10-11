@@ -92,7 +92,7 @@ function myModel() {
         *  user = {
          *      name,
          *      token,
-         *      bonuses,
+         *      gifts,
          *      cups,
          *      qrUrl,
          *  }
