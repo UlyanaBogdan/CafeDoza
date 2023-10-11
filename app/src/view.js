@@ -232,6 +232,7 @@ function myView() {
         console.log("меняю");
         const hashPageName = location.hash.slice(1).toLowerCase();
         if (hashPageName === "bonuses") {
+            console.log("ya vnutri");
             const bonusText = myContainer.querySelector('.bonuses-greeting');
             bonusText.innerText = `Check your bonuses, ${user.name}!`;
             const bonusNumber = myContainer.querySelector('.bonus-number');
