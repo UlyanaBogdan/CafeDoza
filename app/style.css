@@ -949,9 +949,9 @@ h2 {
     top: calc((100vh - 550px)/2);
 }
 #reader {
-    width: 1000px;
+    width: 300px;
     position: fixed;
-    top: -400px;
+    top: 0;
     left: 0;
 }
 .addbtn-admin {
