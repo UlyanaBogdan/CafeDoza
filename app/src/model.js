@@ -98,7 +98,7 @@ function myModel() {
         registeredUser = sendRequest('POST', baseURL + "/ulyana/check", user);
         setCookie('token', registeredUser.token);
     }
-    const url = "http://45.82.71.93:8088/get_user";
+    const url = "woofwoof.space:8088/api/v1/get_user";
 
     this.getUser = async function () {
         // const token = getCookie('token');

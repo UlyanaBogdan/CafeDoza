@@ -2,5 +2,5 @@ export const getUrls = {
     //TODO
     // loginURL: ,
     // registerURL: ,
-    baseURL: "http://45.82.71.93:8088",
+    baseURL: "woofwoof.space:8088/api/v1",
 }
