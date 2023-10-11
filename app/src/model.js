@@ -340,8 +340,8 @@ function myModel() {
     }
 
     let scannedUser = null;
-
     this.scannerQR = function() {
+        myView.closeScanBtn();
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             html5QrCode.stop().then((ignore) => {
