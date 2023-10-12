@@ -106,7 +106,6 @@ function myModel() {
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("something went wrong"));
-            this.manageUser();
     }
 
     this.loginUser = function(email, password) {
@@ -123,19 +122,13 @@ function myModel() {
             .catch(err => myView.error("user not found"));
     }
 
-    this.getUser = async function () {
-        const token = getCookie('token');
-        if (token != undefined) {
-            registeredUser = await this.sendRequest('GET', baseURL + "/get_user");//TODO
-        }
-    }
-
     this.manageUser = function() {
-        this.getUser()
-            .then(user => {
-                myView.changePageUserIn(registeredUser);
-            })
-            .catch(err => myView.error("user not found"));
+        const token = getCookie('token');
+        if (token) {
+            myView.changePageUserIn();
+        } else {
+            myView.hideUser();
+        }
     }
 
     this.logoutUser = function() {
