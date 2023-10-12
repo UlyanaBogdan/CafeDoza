@@ -104,6 +104,7 @@ function myModel() {
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("something went wrong"));
+            this.manageUser();
     }
 
     this.loginUser = function(email, password) {
@@ -121,19 +122,21 @@ function myModel() {
     }
 
     this.getUser = async function () {
-        // const token = getCookie('token');
-        // if (token != undefined) {
-        registeredUser = await this.sendRequest('GET', baseURL + "/get_user");//TODO
-        // }
+        const token = getCookie('token');
+        if (token != undefined) {
+            registeredUser = await this.sendRequest('GET', baseURL + "/get_user");//TODO
+        }
     }
 
     this.manageUser = async function() {
-        await this.getUser();
-        myView.changePageUserIn(registeredUser);
+        let user = await this.getUser();
+        if (user) {
+            myView.changePageUserIn(registeredUser);
+        }
     }
 
     this.logoutUser = function() {
-        if (this.getUser()) {
+        if (getCookie('token')) {
             deleteCookie('token');
             myView.hideUser();
         }
