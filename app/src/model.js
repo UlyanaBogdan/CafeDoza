@@ -7,6 +7,7 @@ function myModel() {
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
     const regURL = getUrls.regURL;
+    const loginURL = getUrls.loginURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -113,7 +114,7 @@ function myModel() {
             email: email,
             password: password
         }
-        this.sendRequest('POST', baseURL + "/check_token", "65749302043")
+        this.sendRequest('POST', baseURL + loginURL, user)
             .then(registeredUser => {
                 myView.successLog(registeredUser);
                 setCookie('token', registeredUser.token);
@@ -141,12 +142,16 @@ function myModel() {
         //     deleteCookie('token');
         //     myView.hideUser();
         // }
-        this.getUser()
-            .then(user => {
+        const logOutUser = {
+            email: registeredUser.email,
+            token: registeredUser.token
+        }
+        this.sendRequest('POST', baseURL + logOutURL, logOutUser)
+            .then(isSuccess => {
                 deleteCookie('token');
                 myView.hideUser();
             })
-            .catch(err => myView.error("user not found"));
+            .catch(err => myView.error("something went wrong"));
     }
 
     this.getQR = function() {
