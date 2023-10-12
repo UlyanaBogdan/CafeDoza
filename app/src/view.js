@@ -228,17 +228,17 @@ function myView() {
         searchInput.value = "";
     }
 
-    this.changePageUserIn = function (user) {
+    this.changePageUserIn = function (registeredUser) {
         const hashPageName = location.hash.slice(1).toLowerCase();
-        if (hashPageName === "bonuses") {
+        if (hashPageName === "bonuses" && registeredUser) {
             bonusText = myContainer.querySelector('.bonuses-greeting');
             const bonusNumber = myContainer.querySelector('.bonus-number');
-            bonusNumber.textContent = user.gifts;
+            bonusNumber.textContent = registeredUser.gifts;
             const qr = myContainer.querySelector('.qr-user');
             const openQr = myContainer.querySelector('.open-qr-user');
-            qr.setAttribute('src', `${user.qrUrl}`);
-            openQr.setAttribute('src', `${user.qrUrl}`);
-            this.showBonuses(user);
+            qr.setAttribute('src', `${registeredUser.qrUrl}`);
+            openQr.setAttribute('src', `${registeredUser.qrUrl}`);
+            this.showBonuses(registeredUser);
         }
         myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');

@@ -14,6 +14,7 @@ function myController() {
     let signInBtn = null;
     let signUpBtn = null;
     let adminInput = null;
+    let registeredUser = null;
 
 
     async function updateState() {
@@ -22,7 +23,7 @@ function myController() {
 
         myModel.updateState(hashPageName);
 
-        await myModel.manageUser();
+        await myModel.manageUser(registeredUser);
         // await myModel.showsomething();
 
 

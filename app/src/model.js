@@ -101,6 +101,7 @@ function myModel() {
          *  }
          */
         this.sendRequest('POST', baseURL + regURL, user)
+            console.log("we are in registration")
             .then(registeredUser => {
                 myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
@@ -122,13 +123,14 @@ function myModel() {
             .catch(err => myView.error("user not found"));
     }
 
-    this.manageUser = function() {
+    this.manageUser = function(regUser) {
         const token = getCookie('token');
         if (token) {
-            myView.changePageUserIn(registeredUser);
+            myView.changePageUserIn(regUser);
         } else {
-            myView.hideUser(registeredUser);
+            myView.hideUser();
         }
+        return registeredUser;
     }
 
     this.logoutUser = function() {
