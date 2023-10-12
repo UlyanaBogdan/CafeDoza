@@ -128,18 +128,25 @@ function myModel() {
         }
     }
 
-    this.manageUser = async function() {
-        let user = await this.getUser();
-        if (user) {
-            myView.changePageUserIn(registeredUser);
-        }
+    this.manageUser = function() {
+        this.getUser()
+            .then(user => {
+                myView.changePageUserIn(registeredUser);
+            })
+            .catch(err => myView.error("user not found"));
     }
 
     this.logoutUser = function() {
-        if (getCookie('token')) {
-            deleteCookie('token');
-            myView.hideUser();
-        }
+        // if (getCookie('token')) {
+        //     deleteCookie('token');
+        //     myView.hideUser();
+        // }
+        this.getUser()
+            .then(user => {
+                deleteCookie('token');
+                myView.hideUser();
+            })
+            .catch(err => myView.error("user not found"));
     }
 
     this.getQR = function() {

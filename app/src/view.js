@@ -394,11 +394,11 @@ function myView() {
     }
 
     this.hideUser = function () {
-        myBonusesMenu = myContainer.querySelector('.mybonuses');
-        logoutBtn.classList.add('closed');
-        authBtn.classList.remove('closed');
-        myBonusesMenu.classList.add('closed');
         window.location.hash = "#main";
+        myBonusesMenu = myContainer.querySelector('.mybonuses');
+        myContainer.querySelector('.logout-btn').classList.add('closed');
+        myContainer.querySelector('.login-btn').classList.remove('closed');
+        myBonusesMenu.classList.add('closed');
     }
 }
 
