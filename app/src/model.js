@@ -8,6 +8,7 @@ function myModel() {
     const baseURL = getUrls.baseURL;
     const regURL = getUrls.regURL;
     const loginURL = getUrls.loginURL;
+    const logOutURL = getUrls.logOutURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;

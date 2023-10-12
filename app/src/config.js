@@ -4,5 +4,6 @@ export const getUrls = {
     // registerURL: ,
     baseURL: "https://woofwoof.space/api/v1",
     regURL: "/registration",
-    loginURL: "/login"
+    loginURL: "/login",
+    logOutURL: "/logout"
 }
