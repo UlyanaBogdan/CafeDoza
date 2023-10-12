@@ -119,13 +119,13 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this.loginUser = function(email, password, registeredUser) {
+    this.loginUser = async function(email, password, registeredUser) {
         //ADD VALIDATION
         const user = {
             email: email,
             password: password
         }
-        this.sendRequest('POST', baseURL + loginURL, user)
+        await this.sendRequest('POST', baseURL + loginURL, user)
             .then(regUserResponse => {
                 myView.successLog(regUserResponse);
                 setCookie('token', regUserResponse.token);

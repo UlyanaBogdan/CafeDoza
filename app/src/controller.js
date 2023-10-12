@@ -151,10 +151,10 @@ function myController() {
         myModel.changeToLog();
     }
 
-    function signIn() {
+    async function signIn() {
         console.log('we before regUser in signUp')
 
-        registeredUser = myModel.loginUser(inputEmail.value, inputPassword.value);
+        await myModel.loginUser(inputEmail.value, inputPassword.value);
 
         console.log('we finish in signIn' + sessionStorage.getItem('user_token'));
 
