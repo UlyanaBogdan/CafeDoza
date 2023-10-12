@@ -22,7 +22,7 @@ function myController() {
 
         myModel.updateState(hashPageName);
 
-        await myModel.manageUser();
+        //await myModel.manageUser();
         // await myModel.showsomething();
 
 
