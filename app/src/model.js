@@ -100,8 +100,8 @@ function myModel() {
          *      qrUrl,
          *  }
          */
+        console.log("we are in registration");
         this.sendRequest('POST', baseURL + regURL, user)
-            console.log("we are in registration")
             .then(registeredUser => {
                 myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
