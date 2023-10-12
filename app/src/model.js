@@ -125,9 +125,9 @@ function myModel() {
     this.manageUser = function() {
         const token = getCookie('token');
         if (token) {
-            myView.changePageUserIn();
+            myView.changePageUserIn(registeredUser);
         } else {
-            myView.hideUser();
+            myView.hideUser(registeredUser);
         }
     }
 
