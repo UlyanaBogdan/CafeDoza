@@ -110,18 +110,35 @@ function myModel() {
         return registeredUser;
     }
 
-    this.loginUser = function(email, password) {
+    /**
+     *  user = {
+     *      name,
+     *      token,
+     *      gifts,
+     *      cups,
+     *      qrUrl,
+     *  }
+     */
+    this.loginUser = function(email, password, registeredUser) {
         //ADD VALIDATION
         const user = {
             email: email,
             password: password
         }
         this.sendRequest('POST', baseURL + loginURL, user)
-            .then(registeredUser => {
-                myView.successLog(registeredUser);
-                setCookie('token', registeredUser.token);
+            .then(regUserResponse => {
+                myView.successLog(regUserResponse);
+                setCookie('token', regUserResponse.token);
+                registeredUser = regUserResponse;
+                // sessionStorage.setItem('user_token', regUserResponse.token);
+                // sessionStorage.setItem('user_email', regUserResponse.email);
+                // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
             })
             .catch(err => myView.error("user not found"));
+        sessionStorage.setItem('user_token', registeredUser.token);
+        sessionStorage.setItem('user_email', registeredUser.email);
+
+        console.log('we are out of then and regUser is ' + registeredUser)
     }
 
     this.manageUser = function(regUser) {
@@ -140,11 +157,12 @@ function myModel() {
         //     myView.hideUser();
         // }
         const logOutUser = {
-            email: registeredUser.email,
-            token: registeredUser.token
+            email: sessionStorage.getItem('user_email'),
+            token: sessionStorage.getItem('user_token')
         }
         this.sendRequest('POST', baseURL + logOutURL, logOutUser)
             .then(isSuccess => {
+                console.log(isSuccess)
                 deleteCookie('token');
                 myView.hideUser();
             })

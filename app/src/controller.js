@@ -21,9 +21,10 @@ function myController() {
         const hashPageName = location.hash.slice(1).toLowerCase();
         // myModel.loadMenu();
 
+        console.log('before updateState and manageUser ' + registeredUser)
         myModel.updateState(hashPageName);
 
-        await myModel.manageUser(registeredUser);
+        registeredUser = myModel.manageUser(registeredUser);
         // await myModel.showsomething();
 
 
@@ -151,11 +152,18 @@ function myController() {
     }
 
     function signIn() {
+        console.log('we before regUser in signUp')
+
         registeredUser = myModel.loginUser(inputEmail.value, inputPassword.value);
+
+        console.log('we finish in signIn' + sessionStorage.getItem('user_token'));
+
     }
 
     function signUp() {
+        console.log('we before regUser in signUp')
         registeredUser = myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+        console.log('we finish in signUp' + registeredUser)
     }
 
     function logout() {
