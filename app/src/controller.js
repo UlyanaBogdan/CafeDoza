@@ -151,15 +151,15 @@ function myController() {
     }
 
     function signIn() {
-        myModel.loginUser(inputEmail.value, inputPassword.value);
+        registeredUser = myModel.loginUser(inputEmail.value, inputPassword.value);
     }
 
     function signUp() {
-        myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+        registeredUser = myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
     }
 
     function logout() {
-        myModel.logoutUser();
+        registeredUser = myModel.logoutUser();
     }
 
     function closeSuccessRegModal() {

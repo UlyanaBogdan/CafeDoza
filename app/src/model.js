@@ -107,6 +107,7 @@ function myModel() {
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("something went wrong"));
+        return registeredUser;
     }
 
     this.loginUser = function(email, password) {
