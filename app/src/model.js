@@ -82,7 +82,7 @@ function myModel() {
         });
     }
 
-    this.regUser = async function(email, password, name) {
+    this.regUser = function(email, password, name) {
         const user = {
             name: name,
             email: email,
@@ -104,7 +104,7 @@ function myModel() {
                 setCookie('token', registeredUser.token);
             })
             .catch(err => myView.error("something went wrong"));
-            await this.manageUser();
+            this.manageUser();
     }
 
     this.loginUser = function(email, password) {
@@ -123,7 +123,7 @@ function myModel() {
 
     this.getUser = async function () {
         const token = getCookie('token');
-        if (token !== undefined) {
+        if (token != undefined) {
             registeredUser = await this.sendRequest('GET', baseURL + "/get_user");//TODO
         }
     }

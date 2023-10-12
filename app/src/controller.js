@@ -153,8 +153,8 @@ function myController() {
         myModel.loginUser(inputEmail.value, inputPassword.value);
     }
 
-    async function signUp() {
-        await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+    function signUp() {
+        myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
     }
 
     function logout() {
