@@ -132,6 +132,8 @@ function myModel() {
         let user = await this.getUser();
         if (user) {
             myView.changePageUserIn(registeredUser);
+        } else {
+
         }
     }
 

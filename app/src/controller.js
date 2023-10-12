@@ -50,15 +50,15 @@ function myController() {
 
         successRegModal = myContainer.querySelector('.successful-reg-modal');
 
-        headerMenu.addEventListener('pointerdown', openHeaderMenu);
-        openAuthBtn.addEventListener('pointerdown', openAuthModal);
-        closeAuthModalBtn.addEventListener('pointerdown', closeAuthModal);
-        changeToRegBtn.addEventListener('pointerdown', changeToReg);
-        changeToLogBtn.addEventListener('pointerdown', changeToLog);
-        signInBtn.addEventListener('pointerdown', signIn);
-        signUpBtn.addEventListener('pointerdown', signUp);
-        signOutBtn.addEventListener('pointerdown', logout);
-        successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
+        headerMenu.addEventListener('pointerdown', await openHeaderMenu);
+        openAuthBtn.addEventListener('pointerdown', await openAuthModal);
+        closeAuthModalBtn.addEventListener('pointerdown', await closeAuthModal);
+        changeToRegBtn.addEventListener('pointerdown', await changeToReg);
+        changeToLogBtn.addEventListener('pointerdown', await changeToLog);
+        signInBtn.addEventListener('pointerdown', await signIn);
+        signUpBtn.addEventListener('pointerdown', await signUp);
+        signOutBtn.addEventListener('pointerdown', await logout);
+        successRegModal.addEventListener('pointerdown', await closeSuccessRegModal);
 
         if (hashPageName === "drinklist") {
             // searchInput = myContainer.querySelector('.search-input');
