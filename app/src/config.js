@@ -6,6 +6,7 @@ export const getUrls = {
     regURL: "/registration",
     roleURL: "/role",
     loginURL: "/login",
+    refreshURL: "/refresh",
     logOutURL: "/logout",
     adminQrURL: "/qr/get_user/",
 

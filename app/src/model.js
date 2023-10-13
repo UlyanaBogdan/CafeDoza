@@ -10,6 +10,7 @@ function myModel() {
     const regURL = getUrls.regURL;
     const roleURL = getUrls.roleURL;
     const loginURL = getUrls.loginURL;
+    const refreshURL = getUrls.refreshURL;
     const logOutURL = getUrls.logOutURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
@@ -27,7 +28,7 @@ function myModel() {
         return EMAIL_REGEXP.test(email);
     }
 
-    this.isPasswordValid = function(password) {
+    this.isPasswordValid = function (password) {
         return PASS_REGEXP.test(password);
     }
 
@@ -37,7 +38,7 @@ function myModel() {
         } else {
             if (!this.isEmailValid(email)) {
                 myView.invalidEmail();
-            } else if (this.isEmailValid(email)){
+            } else if (this.isEmailValid(email)) {
                 myView.closeEmailErr();
             }
         }
@@ -49,7 +50,7 @@ function myModel() {
         } else {
             if (!this.isPasswordValid(password)) {
                 myView.invalidPassword();
-            } else if (this.isPasswordValid(password)){
+            } else if (this.isPasswordValid(password)) {
                 myView.closePassErr();
             }
         }
@@ -57,10 +58,10 @@ function myModel() {
 
     this.getRole = async function () {
         let user = {
-            email : sessionStorage.getItem('user_email'),
-            token : sessionStorage.getItem('user_token')
+            email: sessionStorage.getItem('user_email'),
+            token: sessionStorage.getItem('user_token')
         }
-        let role =  await this.sendRequest('POST', baseURL + roleURL, user);
+        let role = await this.sendRequest('POST', baseURL + roleURL, user);
         return role.role;
     }
 
@@ -84,7 +85,7 @@ function myModel() {
                 if (xhr.status >= 400) {
                     reject(xhr.response);
                 } else {
-                   resolve(JSON.parse(xhr.response));
+                    resolve(JSON.parse(xhr.response));
                 }
             }
 
@@ -96,7 +97,7 @@ function myModel() {
         });
     }
 
-    this.regUser = async function(email, password, name) {
+    this.regUser = async function (email, password, name) {
         const user = {
             name: name,
             email: email,
@@ -104,7 +105,7 @@ function myModel() {
         }
         //ADD VALIDATION
         /**
-        *  user = {
+         *  user = {
          *      name,
          *      token,
          *      gifts,
@@ -119,6 +120,7 @@ function myModel() {
             .then(registeredUser => {
                 myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
+                setCookie('email', registeredUser.email);
             })
             .catch(err => myView.error("something went wrong"));
         return registeredUser;
@@ -133,7 +135,7 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this.loginUser = async function(email, password, registeredUser) {
+    this.loginUser = async function (email, password, registeredUser) {
         console.log("WE ARE IN LOGIN")
         //ADD VALIDATION
         const user = {
@@ -144,6 +146,7 @@ function myModel() {
             .then(regUserResponse => {
                 myView.successLog(regUserResponse);
                 setCookie('token', regUserResponse.token);
+                setCookie('email', regUserResponse.email);
                 registeredUser = regUserResponse;
                 // sessionStorage.setItem('user_token', regUserResponse.token);
                 // sessionStorage.setItem('user_email', regUserResponse.email);
@@ -160,17 +163,36 @@ function myModel() {
         console.log('we are out of then and regUser is ' + registeredUser)
     }
 
-    this.manageUser = async function(regUser) {
+    this.manageUser = async function (regUser) {
         const token = getCookie('token');
+
         if (token) {
+            if (!sessionStorage.getItem('token')) {
+                let refUser = {
+                    email: getCookie('email'),
+                    token: getCookie('token')
+                }
+                await this.sendRequest('POST', baseURL + refreshURL, refUser)
+                    .then(regUserResponse => {
+                        myView.successLog(regUserResponse);
+                        sessionStorage.setItem('user_token', regUserResponse.token);
+                        sessionStorage.setItem('user_email', regUserResponse.email);
+                        sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+                        sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+                        sessionStorage.setItem('user_cups', regUserResponse.cups);
+                    })
+                    .catch(err => myView.error("user not found"));
+
+            }
             await myView.changePageUserIn(regUser);
         } else {
+            sessionStorage.clear()
             await myView.hideUser();
         }
         return registeredUser;
     }
 
-    this.logoutUser = function() {
+    this.logoutUser = function () {
         // if (getCookie('token')) {
         //     deleteCookie('token');
         //     myView.hideUser();
@@ -185,15 +207,16 @@ function myModel() {
             })
             .catch(err => myView.error("something went wrong"));
         deleteCookie('token');
+        deleteCookie('email');
         myView.hideUser();
         sessionStorage.clear();
     }
 
-    this.getQR = function() {
+    this.getQR = function () {
 
     }
 
-    this.searchCookie = function() {
+    this.searchCookie = function () {
         let coks = getCookie('token');
         console.log(coks);
     }
@@ -386,7 +409,7 @@ function myModel() {
     }
 
     let scannedUser = null;
-    this.scannerQR = function() {
+    this.scannerQR = function () {
         myView.closeScanBtn();
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
@@ -397,7 +420,7 @@ function myModel() {
                     email: sessionStorage.getItem('user_email'),
                     token: sessionStorage.getItem('user_token')
                 };
-                    this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
+                this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
                     .then(scannedUser => myView.openAdminBtns(scannedUser))
                     .catch(err => alert("User is not found"));
 
@@ -407,9 +430,9 @@ function myModel() {
             });
 
         };
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+        const config = {fps: 10, qrbox: {width: 250, height: 250}};
 // If you want to prefer back camera
-        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+        html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccessCallback);
 //
 // // Select front camera or fail with `OverconstrainedError`.
 //         html5QrCode.start({ facingMode: { exact: "user"} }, config, qrCodeSuccessCallback);
@@ -469,7 +492,7 @@ function myModel() {
                         token: sessionStorage.getItem('user_token')
                     };
                     this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
-                        .then(clickResponse =>{
+                        .then(clickResponse => {
                             sessionStorage.setItem('user_record', clickResponse);
                             clicks = clickResponse;
                         });
