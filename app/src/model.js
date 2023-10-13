@@ -463,7 +463,7 @@ function myModel() {
             count: count
         }
         const updatedUser = await this.sendRequest('POST', baseURL + addCupsURL, bonusAdd);
-        myView.updateAdminBtnsCount(updatedUser);
+        myView.closeAdminBtns(updatedUser);
         // .then(scanned_user_name => myView.closeAdminBtns())
         // .catch(err => alert("User is not found"));
     }
@@ -477,7 +477,8 @@ function myModel() {
             count: count
         }
         const updatedUser = await this.sendRequest('POST', baseURL + removeGiftsURL, bonusRemove);
-        myView.updateAdminBtnsCount(updatedUser);
+        // myView.updateAdminBtnsCount(updatedUser);
+        myView.closeAdminBtns(updatedUser);
     }
 
     this.formatTime = function (ms) {
