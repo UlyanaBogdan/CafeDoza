@@ -16,6 +16,10 @@ const Header = {
                 <li class="lng-you">You</li>
                 <li><a href="#bonuses" class="lng-bonuses link-menu">My bonuses</a></li>
               </ul>
+              <ul class="navigation closed admin">
+                <li class="lng-you">Admin</li>
+                <li><a href="#adminpage" class="lng-adminpage link-menu">Admin page</a></li>
+              </ul>
               <ul class="navigation">
                 <li class="lng-wannatry">Wanna try?</li>
                 <li><a href="#drinklist" class="lng-menu link-menu">Menu</a></li>

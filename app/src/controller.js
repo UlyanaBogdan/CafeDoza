@@ -40,13 +40,19 @@ function myController() {
         let clearSearchBtn = myContainer.querySelector('.clear-search-btn');
 
         inputEmail = myContainer.querySelector('.email-input');
-        inputEmail.addEventListener('input', checkEmail);
+        inputEmail.addEventListener('input', () => {
+            checkInputs();
+            checkEmail();
+        });
 
         inputPassword = myContainer.querySelector('.input-password');
-        inputPassword.addEventListener('input', checkPassword);
+        inputPassword.addEventListener('input', () => {
+            checkInputs();
+            checkPassword();
+        });
 
         inputName = myContainer.querySelector('.name-input');
-
+        inputName.addEventListener('input', checkInputs);
 
 
         successRegModal = myContainer.querySelector('.successful-reg-modal');
@@ -111,6 +117,10 @@ function myController() {
             }
         }
 
+    }
+
+    function checkInputs() {
+        myModel.checkInputs(inputName.value, inputEmail.value, inputPassword)
     }
 
     function addCupsAdmin() {

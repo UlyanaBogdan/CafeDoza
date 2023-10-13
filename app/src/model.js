@@ -161,7 +161,7 @@ function myModel() {
 
     this.manageUser = async function (regUser) {
         const token = getCookie('token');
-
+        let roleUser;
         if (token) {
             if (!sessionStorage.getItem('user_token')) {
                 let refUser = {
@@ -179,9 +179,13 @@ function myModel() {
                         myView.successLog(role);
                     })
                     .catch(err => myView.error("user not found"));
-
             }
-            await myView.changePageUserIn(regUser);
+            let role = await this.getRole();
+            if (role === "ADMIN") {
+                await myView.changePageUserIn(role);
+            } else {
+                await myView.changePageUserIn();
+            }
         } else {
             sessionStorage.clear()
             await myView.hideUser();
