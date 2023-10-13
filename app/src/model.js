@@ -325,15 +325,6 @@ function myModel() {
         myView.clearSearchInput();
     }
 
-    this.showsomething = function() {
-        const token = {
-            token: "65749302043"
-        }
-        this.sendRequest('POST', baseURL + "/check_json_token", token)
-            .then(scannedUser => console.log(scannedUser))
-            .catch(err => alert("User is not found"));
-    }
-
     this.checkBonuses = function () {
         this.sendRequest('GET', url)
             .then(user => myView.showBonuses(user))
@@ -402,8 +393,7 @@ function myModel() {
                 let admin = {
                     email: sessionStorage.getItem('user_email'),
                     token: sessionStorage.getItem('user_token')
-                }
-                console.log(sessionStorage.getItem('user_token'));
+                };
                 // sessionStorage
                     this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
                     .then(scannedUser => myView.openAdminBtns(scannedUser))
@@ -476,7 +466,7 @@ function myModel() {
                         score: clicks,
                         token: sessionStorage.getItem('user_token')
                     };
-                    this.sendRequest('POST', 'localhost:8088' + "/clicker/finish", clickerRequest)
+                    this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
                         .then(clickResponse =>{
                             sessionStorage.setItem('user_record', clickResponse);
                             clicks = clickResponse;
