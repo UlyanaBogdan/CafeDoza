@@ -58,7 +58,7 @@ function myController() {
         changeToRegBtn.addEventListener('pointerdown', changeToReg);
         changeToLogBtn.addEventListener('pointerdown', changeToLog);
         signInBtn.addEventListener('pointerdown', await signIn);
-        signUpBtn.addEventListener('pointerdown', signUp);
+        signUpBtn.addEventListener('pointerdown', await signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
         let token =sessionStorage.getItem('user_token');
@@ -171,9 +171,9 @@ function myController() {
 
     }
 
-    function signUp() {
+    async function signUp() {
         console.log('we before regUser in signUp')
-        registeredUser = myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+        registeredUser = await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
         console.log('we finish in signUp' + registeredUser)
     }
 

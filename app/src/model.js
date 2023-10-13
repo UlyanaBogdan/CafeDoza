@@ -95,7 +95,7 @@ function myModel() {
         });
     }
 
-    this.regUser = function(email, password, name) {
+    this.regUser = async function(email, password, name) {
         const user = {
             name: name,
             email: email,
@@ -112,7 +112,9 @@ function myModel() {
          *  }
          */
         console.log("we are in registration");
-        this.sendRequest('POST', baseURL + regURL, user)
+        console.log(baseURL);
+        console.log(regURL);
+        await this.sendRequest('POST', baseURL + regURL, user)
             .then(registeredUser => {
                 myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
