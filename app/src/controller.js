@@ -117,14 +117,15 @@ function myController() {
     }
 
     function addCupsAdmin() {
-        myModel.addCupsAdmin();
+        myModel.addCupsAdmin(adminInput.value);
     }
 
     function removeGiftsAdmin() {
-        myModel.removeGiftsAdmin();
+        myModel.removeGiftsAdmin(adminInput.value);
     }
 
     function plusCupInput() {
+        console.log('plusCupInput' + adminInput.value);
         myModel.plusCupInput(Number(adminInput.value));
     }
 

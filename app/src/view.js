@@ -385,8 +385,10 @@ function myView() {
     }
 
     this.plusCupInput = function (value) {
+        console.log('view cups' + value)
         const input = myContainer.querySelector('.input-admin');
         input.value = value;
+        console.log("VIEW CUPS CURRENT" + value)
     }
 
     this.minusCupInput = function (value) {

@@ -9,6 +9,8 @@ export const getUrls = {
     refreshURL: "/refresh",
     logOutURL: "/logout",
     adminQrURL: "/qr/get_user/",
+    addCupsURL: "/cups/add",
+    removeGiftsURL: "/gifts/remove"
 
 
 }

@@ -12,6 +12,7 @@ function myModel() {
     const loginURL = getUrls.loginURL;
     const refreshURL = getUrls.refreshURL;
     const logOutURL = getUrls.logOutURL;
+    const addCupsURL = getUrls.addCupsURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -428,11 +429,13 @@ function myModel() {
                 const scannedUser = await this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin);
                     // .then(scannedUser => myView.openAdminBtns(scannedUser))
                     // .catch(err => alert("User is not found"));
+                sessionStorage.setItem('scanned_user_email', scannedUser.email);
+                sessionStorage.setItem('scanned_user_name', scannedUser.name);
                 myView.openAdminBtns(scannedUser);
                 console.log(scannedUser);
 
             }).catch((err) => {
-                console.log("INSIDE CATCH SOME ERROR SCANNER" + err)
+                console.log("INSIDE CATCH SOME ERROR SCANNER" + err);
                 // console.log(.error);
                 // Stop 3, handle it.
             });
@@ -449,9 +452,13 @@ function myModel() {
 //         html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
     }
 
-    this.addCupsAdmin = function () {
-        const newCups = Number(scannedUser.cups) + 1;
-        this.sendRequest('POST', baseURL + "", newCups)
+    this.addCupsAdmin = function (count) {
+        let bonusAdd = {
+            email : sessionStorage.getItem('scanned_user_email'),
+            name : sessionStorage.getItem('scanned_user_name'),
+            count : sessionStorage.getItem('scanned_user_count')
+        }
+        this.sendRequest('POST', baseURL + addCupsURL, newCups)
             .then(scannedUser => myView.closeAdminBtns())
             .catch(err => alert("User is not found"));
     }
