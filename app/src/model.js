@@ -148,8 +148,9 @@ function myModel() {
         sessionStorage.setItem('user_gifts', registeredUser.gifts);
         sessionStorage.setItem('user_cups', registeredUser.cups);
         let role = await this.getRole();
-        setCookie('token', regUserResponse.token);
-        setCookie('email', regUserResponse.email);
+        //TODO вынести
+        setCookie('token', regUserResponse.token, {expires: new Date() + 7});
+        setCookie('email', regUserResponse.email, {expires: new Date() + 7});
         // sessionStorage.setItem('user_token', regUserResponse.token);
         // sessionStorage.setItem('user_email', regUserResponse.email);
         // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
