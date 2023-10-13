@@ -2,7 +2,7 @@ const ModalAuth = {
     render: () => {
         return `
         <div class="closed modal-overlay"></div>
-        <div class="closed auth-modal" >
+        <div class="closed auth-modal">
           <button type="button" class="close-auth"><img src="./img/plusAuth.svg" class="plus-auth-img"></button>
           <h3 class="first-time-text closed lng-firsttimegreet">Hi, first time here?</h3>
           <h3 class="hi-again-text lng">Hi again!</h3>

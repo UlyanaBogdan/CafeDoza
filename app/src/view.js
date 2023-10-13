@@ -262,24 +262,29 @@ function myView() {
         searchInput.value = "";
     }
 
-    this.changePageUserIn = async function () {
+    this.changePageUserIn = async function (role) {
         const hashPageName = location.hash.slice(1).toLowerCase();
-        const gifts = sessionStorage.getItem('user_gifts');
-        let qrUrl = sessionStorage.getItem('user_qr_url');
-        const cups = sessionStorage.getItem('user_cups');
-        if (hashPageName === "bonuses") {
-            bonusText = myContainer.querySelector('.bonuses-greeting');
-            bonusNumber = myContainer.querySelector('.bonus-number');
-            bonusNumber.textContent = gifts;
-            const qr = myContainer.querySelector('.qr-user');
-            const openQr = myContainer.querySelector('.open-qr-user');
-            console.log(qrUrl);
-            qr.setAttribute('src', qrUrl);
-            openQr.setAttribute('src', qrUrl);
-            this.showBonuses(cups);
+        if (role === "ADMIN") {
+            const adminMenu = myContainer.querySelector('.admin');
+            adminMenu.classList.remove('closed');
+        } else {
+            const gifts = sessionStorage.getItem('user_gifts');
+            let qrUrl = sessionStorage.getItem('user_qr_url');
+            const cups = sessionStorage.getItem('user_cups');
+            if (hashPageName === "bonuses") {
+                bonusText = myContainer.querySelector('.bonuses-greeting');
+                bonusNumber = myContainer.querySelector('.bonus-number');
+                bonusNumber.textContent = gifts;
+                const qr = myContainer.querySelector('.qr-user');
+                const openQr = myContainer.querySelector('.open-qr-user');
+                console.log(qrUrl);
+                qr.setAttribute('src', qrUrl);
+                openQr.setAttribute('src', qrUrl);
+                this.showBonuses(cups);
+            }
+            myBonusesMenu = myContainer.querySelector('.mybonuses');
+            myBonusesMenu.classList.remove('closed');
         }
-        myBonusesMenu = myContainer.querySelector('.mybonuses');
-        myBonusesMenu.classList.remove('closed');
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
     }

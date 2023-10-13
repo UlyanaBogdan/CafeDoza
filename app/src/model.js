@@ -175,7 +175,8 @@ function myModel() {
                 myView.successLog(role);
 
             }
-            await myView.changePageUserIn();
+            let role = await this.getRole();
+            await myView.changePageUserIn(role);
         } else {
             sessionStorage.clear()
             await myView.hideUser();
