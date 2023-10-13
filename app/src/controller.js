@@ -22,7 +22,7 @@ function myController() {
 
         myModel.updateState(hashPageName);
 
-        await myModel.manageUser(registeredUser);
+        await myModel.manageUser();
         // await myModel.showsomething();
 
 
@@ -47,7 +47,6 @@ function myController() {
         inputName = myContainer.querySelector('.name-input');
 
 
-
         successRegModal = myContainer.querySelector('.successful-reg-modal');
 
         headerMenu.addEventListener('pointerdown', openHeaderMenu);
@@ -59,7 +58,7 @@ function myController() {
         signUpBtn.addEventListener('pointerdown', await signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
-        let token =sessionStorage.getItem('user_token');
+        let token = sessionStorage.getItem('user_token');
         if (hashPageName === "drinklist") {
             // searchInput = myContainer.querySelector('.search-input');
             // searchInput.addEventListener('input', searchDrink)
@@ -163,11 +162,11 @@ function myController() {
     }
 
     async function signUp() {
-        registeredUser = await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+        await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
     }
 
     function logout() {
-        registeredUser = myModel.logoutUser();
+        myModel.logoutUser();
     }
 
     function closeSuccessRegModal() {
