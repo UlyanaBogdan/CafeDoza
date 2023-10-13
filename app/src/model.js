@@ -458,7 +458,7 @@ function myModel() {
             name : sessionStorage.getItem('scanned_user_name'),
             count : sessionStorage.getItem('scanned_user_count')
         }
-        this.sendRequest('POST', baseURL + addCupsURL, newCups)
+        this.sendRequest('POST', baseURL + addCupsURL, bonusAdd)
             .then(scannedUser => myView.closeAdminBtns())
             .catch(err => alert("User is not found"));
     }
