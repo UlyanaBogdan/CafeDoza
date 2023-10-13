@@ -179,10 +179,10 @@ function myModel() {
         this.sendRequest('POST', baseURL + logOutURL, logOutUser)
             .then(isSuccess => {
                 console.log(isSuccess)
-                deleteCookie('token');
-                myView.hideUser();
             })
             .catch(err => myView.error("something went wrong"));
+        deleteCookie('token');
+        myView.hideUser();
         sessionStorage.clear();
     }
 
