@@ -455,6 +455,8 @@ function myModel() {
 
     this.addCupsAdmin = async function (count) {
         let bonusAdd = {
+            adminEmail: sessionStorage.getItem('user_email'),
+            adminToken: sessionStorage.getItem('user_token'),
             email: sessionStorage.getItem('scanned_user_email'),
             name: sessionStorage.getItem('scanned_user_name'),
             count: count
