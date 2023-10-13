@@ -38,6 +38,7 @@ body {
     -moz-transition: all 0.3s ease;;
     -o-transition: all 0.3s ease;;
     transition: all 0.3s ease;
+    touch-action: manipulation;
 }
 
 /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
@@ -868,10 +869,12 @@ h2 {
     min-height: 2em;
     margin: 0;
     width: auto;
+    touch-action: manipulation;
 }
 
 .clicks {
     color: #000000;
+    touch-action: manipulation;
 }
 
 .click-btn {
@@ -884,6 +887,7 @@ h2 {
     width: 400px;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     /*box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.15);*/
 }
 

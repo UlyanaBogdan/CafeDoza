@@ -394,7 +394,6 @@ function myModel() {
                     email: sessionStorage.getItem('user_email'),
                     token: sessionStorage.getItem('user_token')
                 };
-                // sessionStorage
                     this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
                     .then(scannedUser => myView.openAdminBtns(scannedUser))
                     .catch(err => alert("User is not found"));
