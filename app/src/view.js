@@ -24,6 +24,7 @@ function myView() {
     let searchInput = null;
     let myBonusesMenu = null;
     let bonusText = null;
+    let bonusNumber = null;
     let inputDiv = null;
     let scanQRBtn = null;
     let adminButtons = null;
@@ -178,12 +179,25 @@ function myView() {
         newHereBtn.classList.remove('closed');
     }
 
-    this.successLog = function (user) {
-        this.clearInputs();
-        authModal.classList.add('closed');
-        modalOverlay.classList.add('closed');
-        window.location.hash = "#bonuses";
+    this.successLog = function (role) {
+        console.log('ROLE AFTER LOG ' + role);
+        switch (role) {
+            case 'USER':
+                this.clearInputs();
+                authModal.classList.add('closed');
+                modalOverlay.classList.add('closed');
+                window.location.hash = "#bonuses";
+                break;
+            case 'ADMIN':
+                this.clearInputs();
+                authModal.classList.add('closed');
+                modalOverlay.classList.add('closed');
+                window.location.hash = "#adminpage";
+                break;
+        }
+
     }
+
 
     this.logout = function () {
         logoutBtn.classList.add('closed');
@@ -192,10 +206,19 @@ function myView() {
         window.location.hash = "#main";
     }
 
+    this.goToAdminPage = function () {
+        this.clearInputs();
+        authModal.classList.add('closed');
+        modalOverlay.classList.add('closed');
+        window.location.hash = "#adminpage";
+    }
+
     this.successReg = function (user) {
         this.successLog(user);
         successRegModal.classList.remove('closed');
-        setTimeout(() => {successRegModal.classList.add('closed');}, 3000);
+        setTimeout(() => {
+            successRegModal.classList.add('closed');
+        }, 3000);
     }
 
     this.closeSuccessRegModal = function () {
@@ -246,7 +269,7 @@ function myView() {
         const cups = sessionStorage.getItem('user_cups');
         if (hashPageName === "bonuses") {
             bonusText = myContainer.querySelector('.bonuses-greeting');
-            const bonusNumber = myContainer.querySelector('.bonus-number');
+            bonusNumber = myContainer.querySelector('.bonus-number');
             bonusNumber.textContent = gifts;
             const qr = myContainer.querySelector('.qr-user');
             const openQr = myContainer.querySelector('.open-qr-user');
@@ -255,7 +278,7 @@ function myView() {
             openQr.setAttribute('src', qrUrl);
             this.showBonuses(cups);
         }
-        // myBonusesMenu = myContainer.querySelector('.mybonuses');
+        myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
@@ -289,9 +312,9 @@ function myView() {
         scanBtn.classList.remove('closed');
     }
 
-    this.openAdminBtns = function(user) {
+    this.openAdminBtns = function (user) {
         console.log("We are in admin buttons")
-        userGiftsAdmin.textContent = `${user.name} has ${user.gifts} gifts`;
+        userGiftsAdmin.textContent = `${user.name} ${user.gifts} gifts ${user.cups} cups`;
         userGiftsAdmin.classList.remove('closed');
         inputDiv.classList.remove('closed');
         scanQRBtn.classList.add('closed');
@@ -306,6 +329,10 @@ function myView() {
         userGiftsAdmin.textContent = "";
     }
 
+    this.updateAdminBtnsCount = function (user) {
+        userGiftsAdmin.textContent = `${user.name} ${user.gifts} gifts ${user.cups} cups`;
+    }
+
     this.clearCodeInput = function () {
         myContainer.querySelector('.code-input').value = "";
     }
@@ -313,7 +340,9 @@ function myView() {
     this.showPlusOneModal = function (user) {
         const plusOneModal = myContainer.querySelector('.modal-coffee');
         plusOneModal.classList.remove('closed');
-        setTimeout(() => {plusOneModal.classList.add('closed');}, 3000);
+        setTimeout(() => {
+            plusOneModal.classList.add('closed');
+        }, 3000);
         this.showBonuses(user);
     }
 
@@ -322,7 +351,9 @@ function myView() {
         const bonusNumber = myContainer.querySelector('.bonus-number');
         bonusNumber.innerText = user.gifts;
         winBonusModal.classList.remove('closed');
-        setTimeout(() => {winBonusModal.classList.add('closed');}, 3000);
+        setTimeout(() => {
+            winBonusModal.classList.add('closed');
+        }, 3000);
         this.showBonuses(user);
     }
 
@@ -350,7 +381,9 @@ function myView() {
             errorText.textContent = "Error: " + errorName;
         }
 
-        setTimeout(() => {errorBlock.classList.add('closed');}, 3000);
+        setTimeout(() => {
+            errorBlock.classList.add('closed');
+        }, 3000);
     }
 
     this.updateClicks = function (clicks) {
@@ -362,7 +395,9 @@ function myView() {
         const gameStatus = myContainer.querySelector('.game-header');
         const gameBtn = myContainer.querySelector('.click-btn');
         gameBtn.setAttribute('disabled', 'disabled');
-        setTimeout(() => {gameBtn.removeAttribute('disabled');}, 2000);
+        setTimeout(() => {
+            gameBtn.removeAttribute('disabled');
+        }, 2000);
         gameStatus.textContent = 'The end. Best: ' + sessionStorage.getItem('user_record');
     }
 
@@ -413,7 +448,7 @@ function myView() {
         myContainer.querySelector('.login-btn').classList.remove('closed');
         myBonusesMenu.classList.add('closed');
         window.location.hash = "#main";
+
     }
 }
-
 export default myView;

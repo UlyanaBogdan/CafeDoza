@@ -136,32 +136,31 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this. loginUser = async function (email, password, registeredUser) {
+    this.loginUser = async function (email, password, registeredUser) {
         console.log("WE ARE IN LOGIN")
         //ADD VALIDATION
         const user = {
             email: email,
             password: password
         }
-        await this.sendRequest('POST', baseURL + loginURL, user)
-            .then(regUserResponse => {
-                myView.successLog(regUserResponse);
-                setCookie('token', regUserResponse.token);
-                setCookie('email', regUserResponse.email);
-                registeredUser = regUserResponse;
-                // sessionStorage.setItem('user_token', regUserResponse.token);
-                // sessionStorage.setItem('user_email', regUserResponse.email);
-                // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
-            })
-            .catch(err => myView.error("user not found"));
-        console.log('user gifts ' + registeredUser.gifts);
+        console.log("WE'RE TRYING TO SEND LOGIN " + email + password)
+        let regUserResponse = await this.sendRequest('POST', baseURL + loginURL, user);
+        registeredUser = regUserResponse;
         sessionStorage.setItem('user_token', registeredUser.token);
         sessionStorage.setItem('user_email', registeredUser.email);
         sessionStorage.setItem('user_qr_url', registeredUser.qrUrl);
         sessionStorage.setItem('user_gifts', registeredUser.gifts);
         sessionStorage.setItem('user_cups', registeredUser.cups);
+        let role = await this.getRole();
+        setCookie('token', regUserResponse.token);
+        setCookie('email', regUserResponse.email);
+        // sessionStorage.setItem('user_token', regUserResponse.token);
+        // sessionStorage.setItem('user_email', regUserResponse.email);
+        // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
 
-        console.log('we are out of then and regUser is ' + registeredUser)
+        console.log("ROLE IS " + role);
+        myView.successLog(role);
+
     }
 
     this.manageUser = async function (regUser) {
@@ -174,13 +173,14 @@ function myModel() {
                     token: getCookie('token')
                 }
                 await this.sendRequest('POST', baseURL + refreshURL, refUser)
-                    .then(regUserResponse => {
+                    .then(async regUserResponse => {
                         sessionStorage.setItem('user_token', regUserResponse.token);
                         sessionStorage.setItem('user_email', regUserResponse.email);
                         sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
                         sessionStorage.setItem('user_gifts', regUserResponse.gifts);
                         sessionStorage.setItem('user_cups', regUserResponse.cups);
-                        myView.successLog(regUserResponse);
+                        let role = await this.getRole();
+                        myView.successLog(role);
                     })
                     .catch(err => myView.error("user not found"));
 
@@ -236,6 +236,10 @@ function myModel() {
 
     this.closeAuthModal = function () {
         myView.closeAuthModal();
+    }
+
+    this.goToAdminPage = function () {
+        myView.goToAdminPage();
     }
 
     this.changeToReg = function () {
@@ -427,8 +431,9 @@ function myModel() {
                 console.log(admin.token);
                 console.log(requestUrl);
                 const scannedUser = await this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin);
-                    // .then(scannedUser => myView.openAdminBtns(scannedUser))
-                    // .catch(err => alert("User is not found"));
+                // .then(scannedUser => myView.openAdminBtns(scannedUser))
+                // .catch(err => alert("User is not found"));
+                console.log('SCANNED USER ALREADY FROM BACK' + scannedUser)
                 sessionStorage.setItem('scanned_user_email', scannedUser.email);
                 sessionStorage.setItem('scanned_user_name', scannedUser.name);
                 myView.openAdminBtns(scannedUser);
@@ -443,7 +448,7 @@ function myModel() {
         };
         const config = {fps: 10, qrbox: {width: 250, height: 250}};
 // If you want to prefer back camera
-        html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccessCallback);
+        html5QrCode.start({facingMode: "environment"}, config, await qrCodeSuccessCallback);
 //
 // // Select front camera or fail with `OverconstrainedError`.
 //         html5QrCode.start({ facingMode: { exact: "user"} }, config, qrCodeSuccessCallback);
@@ -452,15 +457,19 @@ function myModel() {
 //         html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
     }
 
-    this.addCupsAdmin = function (count) {
+    this.addCupsAdmin = async function (count) {
+        console.log('INSIDE ADD BUTTON ' + count);
+        console.log('EMAIL' + sessionStorage.getItem('scanned_user_email'));
+        console.log('EMAIL' + sessionStorage.getItem('scanned_user_email'));
         let bonusAdd = {
-            email : sessionStorage.getItem('scanned_user_email'),
-            name : sessionStorage.getItem('scanned_user_name'),
-            count : sessionStorage.getItem('scanned_user_count')
+            email: sessionStorage.getItem('scanned_user_email'),
+            name: sessionStorage.getItem('scanned_user_name'),
+            count: count
         }
-        this.sendRequest('POST', baseURL + addCupsURL, bonusAdd)
-            .then(scannedUser => myView.closeAdminBtns())
-            .catch(err => alert("User is not found"));
+        const updatedUser = await this.sendRequest('POST', baseURL + addCupsURL, bonusAdd);
+        myView.updateAdminBtnsCount(updatedUser);
+        // .then(scanned_user_name => myView.closeAdminBtns())
+        // .catch(err => alert("User is not found"));
     }
 
     this.removeGiftsAdmin = function () {
@@ -475,6 +484,7 @@ function myModel() {
         return Number.parseFloat(ms / 1000).toFixed(2);
     }
 
+    //TODO check record before, fix 1 game late
     this.startGame = function () {
         if (gameIsStarted) {
             clicks += 1;

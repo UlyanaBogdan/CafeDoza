@@ -72,7 +72,6 @@ function myController() {
         }
         if (hashPageName === "adminpage" && token) {
             const role = await myModel.getRole();
-            console.log('ROLE INSIDE ADMINPAGE ' + role)
             if (role === 'ADMIN') {
                 const scanBtn = myContainer.querySelector('#scan-qr-btn');
                 scanBtn.addEventListener('pointerdown', scanQR);
@@ -163,10 +162,10 @@ function myController() {
         myModel.changeToLog();
     }
 
-    async function signIn() {
+    function signIn() {
         console.log('we before regUser in signUp')
 
-        await myModel.loginUser(inputEmail.value, inputPassword.value);
+        myModel.loginUser(inputEmail.value, inputPassword.value);
 
         console.log('we finish in signIn' + sessionStorage.getItem('user_token'));
 
