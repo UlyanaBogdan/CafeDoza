@@ -321,12 +321,16 @@ function myView() {
         adminButtons.classList.remove('closed');
     }
 
-    this.closeAdminBtns = function () {
-        adminButtons.classList.add('closed');
-        userGiftsAdmin.classList.add('closed');
-        inputDiv.classList.add('closed');
-        scanQRBtn.classList.remove('closed');
-        userGiftsAdmin.textContent = "";
+    this.closeAdminBtns = function (updatedUser) {
+        this.updateAdminBtnsCount(updatedUser);
+        setTimeout(() => {
+            adminButtons.classList.add('closed');
+            userGiftsAdmin.classList.add('closed');
+            inputDiv.classList.add('closed');
+            scanQRBtn.classList.remove('closed');
+            userGiftsAdmin.textContent = "";
+        }, 1500);
+
     }
 
     this.updateAdminBtnsCount = function (user) {
