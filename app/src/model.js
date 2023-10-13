@@ -167,19 +167,19 @@ function myModel() {
         const token = getCookie('token');
 
         if (token) {
-            if (!sessionStorage.getItem('token')) {
+            if (!sessionStorage.getItem('user_token')) {
                 let refUser = {
                     email: getCookie('email'),
                     token: getCookie('token')
                 }
                 await this.sendRequest('POST', baseURL + refreshURL, refUser)
                     .then(regUserResponse => {
-                        myView.successLog(regUserResponse);
                         sessionStorage.setItem('user_token', regUserResponse.token);
                         sessionStorage.setItem('user_email', regUserResponse.email);
                         sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
                         sessionStorage.setItem('user_gifts', regUserResponse.gifts);
                         sessionStorage.setItem('user_cups', regUserResponse.cups);
+                        myView.successLog(regUserResponse);
                     })
                     .catch(err => myView.error("user not found"));
 

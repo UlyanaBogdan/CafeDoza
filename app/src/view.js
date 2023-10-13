@@ -244,7 +244,7 @@ function myView() {
             openQr.setAttribute('src', qrUrl);
             this.showBonuses(cups);
         }
-        myBonusesMenu = myContainer.querySelector('.mybonuses');
+        // myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
