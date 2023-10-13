@@ -7,5 +7,7 @@ export const getUrls = {
     roleURL: "/role",
     loginURL: "/login",
     logOutURL: "/logout",
+    adminQrURL: "/qr/get_user/",
+
 
 }

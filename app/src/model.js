@@ -6,6 +6,7 @@ function myModel() {
     let timeOut = 5000;
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
+    const adminQrURL = getUrls.adminQrURL;
     const regURL = getUrls.regURL;
     const roleURL = getUrls.roleURL;
     const loginURL = getUrls.loginURL;
@@ -395,10 +396,15 @@ function myModel() {
         myView.closeScanBtn();
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-            html5QrCode.stop().then((ignore) => {
+            html5QrCode.stop().then(async (ignore) => {
                 // QR Code scanning is stopped.
                 console.log(decodedText);
-                this.sendRequest('POST', baseURL + "", decodedText)
+                let admin = {
+                    email: sessionStorage.getItem('user_email'),
+                    token: sessionStorage.getItem('token')
+                }
+                sessionStorage.
+                    this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
                     .then(scannedUser => myView.openAdminBtns(scannedUser))
                     .catch(err => alert("User is not found"));
             }).catch((err) => {
@@ -467,7 +473,7 @@ function myModel() {
                         score: clicks,
                         token: sessionStorage.getItem('user_token')
                     };
-                    this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
+                    this.sendRequest('POST', 'localhost:8088' + "/clicker/finish", clickerRequest)
                         .then(clickResponse =>{
                             sessionStorage.setItem('user_record', clickResponse);
                             clicks = clickResponse;
