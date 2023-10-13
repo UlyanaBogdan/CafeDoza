@@ -455,6 +455,10 @@ function myModel() {
     }
 
     this.addCupsAdmin = async function (count) {
+        console.log(sessionStorage.getItem('user_email'));
+        console.log(sessionStorage.getItem('user_token'));
+        console.log(sessionStorage.getItem('scanned_user_email'));
+        console.log(sessionStorage.getItem('scanned_user_name'));
         let bonusAdd = {
             adminEmail: sessionStorage.getItem('user_email'),
             adminToken: sessionStorage.getItem('user_token'),
