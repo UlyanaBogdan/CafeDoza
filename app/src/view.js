@@ -279,6 +279,7 @@ function myView() {
     }
 
     this.openAdminBtns = function(user) {
+        console.log("We are in admin buttons")
         const inputDiv = myContainer.querySelector('inputblock-admin');
         inputDiv.classList.remove('closed');
         const scanQRBtn = myContainer.querySelector('#scan-qr-btn');

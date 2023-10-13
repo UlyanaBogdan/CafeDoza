@@ -401,14 +401,17 @@ function myModel() {
                 console.log(decodedText);
                 let admin = {
                     email: sessionStorage.getItem('user_email'),
-                    token: sessionStorage.getItem('token')
+                    token: sessionStorage.getItem('user_token')
                 }
-                sessionStorage.
+                console.log(sessionStorage.getItem('user_token'));
+                // sessionStorage
                     this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
                     .then(scannedUser => myView.openAdminBtns(scannedUser))
                     .catch(err => alert("User is not found"));
+
             }).catch((err) => {
-                // Stop failed, handle it.
+                // console.log(.error);
+                // Stop 3, handle it.
             });
 
         };
