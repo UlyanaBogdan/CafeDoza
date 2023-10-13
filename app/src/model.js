@@ -13,6 +13,7 @@ function myModel() {
     const refreshURL = getUrls.refreshURL;
     const logOutURL = getUrls.logOutURL;
     const addCupsURL = getUrls.addCupsURL;
+    const removeGiftsURL = getUrls.removeGiftsURL;
     let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -467,12 +468,16 @@ function myModel() {
         // .catch(err => alert("User is not found"));
     }
 
-    this.removeGiftsAdmin = function () {
-        const newGifts = Number(scannedUser.gifts) - 1;
-        this.sendRequest('POST', baseURL + "", newGifts)
-            .then(scannedUser => myView.closeAdminBtns())
-            .catch(err => alert("User is not found"));
-
+    this.removeGiftsAdmin = async function (count) {
+        let bonusRemove = {
+            adminEmail: sessionStorage.getItem('user_email'),
+            adminToken: sessionStorage.getItem('user_token'),
+            email: sessionStorage.getItem('scanned_user_email'),
+            name: sessionStorage.getItem('scanned_user_name'),
+            count: count
+        }
+        const updatedUser = await this.sendRequest('POST', baseURL + removeGiftsURL, bonusRemove);
+        myView.updateAdminBtnsCount(updatedUser);
     }
 
     this.formatTime = function (ms) {
