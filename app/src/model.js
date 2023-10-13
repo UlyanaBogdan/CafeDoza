@@ -160,34 +160,30 @@ function myModel() {
 
     }
 
-    this.manageUser = async function (regUser) {
+    this.manageUser = async function () {
         const token = getCookie('token');
-
         if (token) {
             if (!sessionStorage.getItem('user_token')) {
                 let refUser = {
                     email: getCookie('email'),
                     token: getCookie('token')
                 }
-                await this.sendRequest('POST', baseURL + refreshURL, refUser)
-                    .then(async regUserResponse => {
-                        sessionStorage.setItem('user_token', regUserResponse.token);
-                        sessionStorage.setItem('user_email', regUserResponse.email);
-                        sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
-                        sessionStorage.setItem('user_gifts', regUserResponse.gifts);
-                        sessionStorage.setItem('user_cups', regUserResponse.cups);
-                        let role = await this.getRole();
-                        myView.successLog(role);
-                    })
-                    .catch(err => myView.error("user not found"));
+                let regUserResponse = await this.sendRequest('POST', baseURL + refreshURL, refUser);
+                sessionStorage.setItem('user_token', regUserResponse.token);
+                sessionStorage.setItem('user_email', regUserResponse.email);
+                sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+                sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+                sessionStorage.setItem('user_cups', regUserResponse.cups);
+                let role = await this.getRole();
+                myView.successLog(role);
 
             }
-            await myView.changePageUserIn(regUser);
+            await myView.changePageUserIn();
         } else {
             sessionStorage.clear()
             await myView.hideUser();
         }
-        return registeredUser;
+        return;
     }
 
     this.logoutUser = function () {
