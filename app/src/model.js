@@ -420,8 +420,8 @@ function myModel() {
                 // QR Code scanning is stopped.
                 console.log(decodedText);
                 let admin = {
-                    email: sessionStorage.getItem('user_email'),
-                    token: sessionStorage.getItem('user_token')
+                    email: getCookie('email'),
+                    token: getCookie('token')
                 };
                 const requestUrl = baseURL + adminQrURL + decodedText;
                 console.log(admin.email);
