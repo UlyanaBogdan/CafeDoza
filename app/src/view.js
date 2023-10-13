@@ -299,11 +299,10 @@ function myView() {
     }
 
     this.closeAdminBtns = function () {
-        const scanQRBtn = myContainer.querySelector('#scan-qr-btn');
-        scanQRBtn.classList.remove('closed');
-        const adminButtons = myContainer.querySelector('#buttons-admin');
         adminButtons.classList.add('closed');
-        const userGiftsAdmin = myContainer.querySelector('.userGiftsForAdmin');
+        userGiftsAdmin.classList.add('closed');
+        inputDiv.classList.add('closed');
+        scanQRBtn.classList.remove('closed');
         userGiftsAdmin.textContent = "";
     }
 

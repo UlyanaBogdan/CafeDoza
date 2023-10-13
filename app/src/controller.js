@@ -133,8 +133,8 @@ function myController() {
         myModel.minusCupInput(Number(adminInput.value));
     }
 
-    function scanQR() {
-        myModel.scannerQR();
+    async function scanQR() {
+        await myModel.scannerQR();
     }
 
     function openHeaderMenu() {

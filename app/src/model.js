@@ -136,7 +136,7 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this.loginUser = async function (email, password, registeredUser) {
+    this. loginUser = async function (email, password, registeredUser) {
         console.log("WE ARE IN LOGIN")
         //ADD VALIDATION
         const user = {
@@ -410,7 +410,7 @@ function myModel() {
     }
 
     let scannedUser = null;
-    this.scannerQR = function () {
+    this.scannerQR = async function () {
         myView.closeScanBtn();
         const html5QrCode = new Html5Qrcode("reader");
         console.log("IN SCANNER BEFORE CALLBACK")
