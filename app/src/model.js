@@ -14,7 +14,6 @@ function myModel() {
     const logOutURL = getUrls.logOutURL;
     const addCupsURL = getUrls.addCupsURL;
     const removeGiftsURL = getUrls.removeGiftsURL;
-    let registeredUser = null;
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const PASS_REGEXP = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
@@ -122,7 +121,6 @@ function myModel() {
                 setCookie('email', registeredUser.email);
             })
             .catch(err => myView.error("something went wrong"));
-        return registeredUser;
     }
 
     /**
@@ -134,7 +132,7 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this.loginUser = async function (email, password, registeredUser) {
+    this.loginUser = async function (email, password) {
         //ADD VALIDATION
         const user = {
             email: email,
@@ -142,12 +140,11 @@ function myModel() {
         }
         console.log("WE'RE TRYING TO SEND LOGIN " + email + password)
         let regUserResponse = await this.sendRequest('POST', baseURL + loginURL, user);
-        registeredUser = regUserResponse;
-        sessionStorage.setItem('user_token', registeredUser.token);
-        sessionStorage.setItem('user_email', registeredUser.email);
-        sessionStorage.setItem('user_qr_url', registeredUser.qrUrl);
-        sessionStorage.setItem('user_gifts', registeredUser.gifts);
-        sessionStorage.setItem('user_cups', registeredUser.cups);
+        sessionStorage.setItem('user_token', regUserResponse.token);
+        sessionStorage.setItem('user_email', regUserResponse.email);
+        sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+        sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+        sessionStorage.setItem('user_cups', regUserResponse.cups);
         let role = await this.getRole();
         //TODO вынести
         setCookie('token', regUserResponse.token, {expires: new Date() + 7});
