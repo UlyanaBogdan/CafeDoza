@@ -57,7 +57,7 @@ function myController() {
         closeAuthModalBtn.addEventListener('pointerdown', closeAuthModal);
         changeToRegBtn.addEventListener('pointerdown', changeToReg);
         changeToLogBtn.addEventListener('pointerdown', changeToLog);
-        signInBtn.addEventListener('pointerdown', signIn);
+        signInBtn.addEventListener('pointerdown', await signIn);
         signUpBtn.addEventListener('pointerdown', signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
@@ -71,17 +71,20 @@ function myController() {
             // });
         }
         if (hashPageName === "adminpage") {
-            const scanBtn = myContainer.querySelector('#scan-qr-btn');
-            scanBtn.addEventListener('pointerdown', scanQR);
-            const addCupsBtn = myContainer.querySelector('.add-cups');
-            const removeCupsBtn = myContainer.querySelector('.remove-cups');
-            addCupsBtn.addEventListener('pointerdown', plusCupInput);
-            removeCupsBtn.addEventListener('pointerdown', minusCupInput);
-            adminInput = myContainer.querySelector('.input-admin');
-            const addCupsToUserBtn = myContainer.querySelector('#addbtn-admin');
-            const removeCupsFromUserBtn = myContainer.querySelector('#removebtn-admin');
-            addCupsToUserBtn.addEventListener('pointerdown', addCupsAdmin);
-            removeCupsFromUserBtn.addEventListener('pointerdown', removeCupsAdmin);
+            const role = await myModel.getRole();
+            if (role === 'ADMIN') {
+                const scanBtn = myContainer.querySelector('#scan-qr-btn');
+                scanBtn.addEventListener('pointerdown', scanQR);
+                const addCupsBtn = myContainer.querySelector('.add-cups');
+                const removeCupsBtn = myContainer.querySelector('.remove-cups');
+                addCupsBtn.addEventListener('pointerdown', plusCupInput);
+                removeCupsBtn.addEventListener('pointerdown', minusCupInput);
+                adminInput = myContainer.querySelector('.input-admin');
+                const addCupsToUserBtn = myContainer.querySelector('#addbtn-admin');
+                const removeCupsFromUserBtn = myContainer.querySelector('#removebtn-admin');
+                addCupsToUserBtn.addEventListener('pointerdown', addCupsAdmin);
+                removeCupsFromUserBtn.addEventListener('pointerdown', removeCupsAdmin);
+            }
         }
 
         if (hashPageName === "bonuses") {
@@ -198,8 +201,8 @@ function myController() {
         myModel.closeWinBonusModal();
     }
 
-    function startGame() {
-        myModel.startGame();
+    async function startGame() {
+        await myModel.startGame();
     }
 
     function openCode() {

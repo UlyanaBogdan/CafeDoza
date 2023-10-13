@@ -228,17 +228,21 @@ function myView() {
         searchInput.value = "";
     }
 
-    this.changePageUserIn = function (registeredUser) {
+    this.changePageUserIn = async function () {
         const hashPageName = location.hash.slice(1).toLowerCase();
-        if (hashPageName === "bonuses" && registeredUser) {
+        const gifts = sessionStorage.getItem('user_gifts');
+        let qrUrl = sessionStorage.getItem('user_qr_url');
+        const cups = sessionStorage.getItem('user_cups');
+        if (hashPageName === "bonuses") {
             bonusText = myContainer.querySelector('.bonuses-greeting');
             const bonusNumber = myContainer.querySelector('.bonus-number');
-            bonusNumber.textContent = registeredUser.gifts;
+            bonusNumber.textContent = gifts;
             const qr = myContainer.querySelector('.qr-user');
             const openQr = myContainer.querySelector('.open-qr-user');
-            qr.setAttribute('src', `${registeredUser.qrUrl}`);
-            openQr.setAttribute('src', `${registeredUser.qrUrl}`);
-            this.showBonuses(registeredUser);
+            console.log(qrUrl);
+            qr.setAttribute('src', qrUrl);
+            openQr.setAttribute('src', qrUrl);
+            this.showBonuses(cups);
         }
         myBonusesMenu = myContainer.querySelector('.mybonuses');
         myBonusesMenu.classList.remove('closed');
@@ -246,11 +250,11 @@ function myView() {
         authBtn.classList.add('closed');
     }
 
-    this.showBonuses = function (user) {
+    this.showBonuses = function (cups) {
         const bonusText = myContainer.querySelector('.bonuses-greeting');
         const progressBar = myContainer.querySelector('.cup-progress');
-        const userProgress = user.cups / 10 * 100;
-        bonusText.innerHTML = `You have ${user.cups}/10 cups♥`;
+        const userProgress = cups / 10 * 100;
+        bonusText.innerHTML = `You have ${cups}/10 cups♥`;
         progressBar.animate(
             [
                 {width: "0"},
@@ -351,7 +355,7 @@ function myView() {
         const gameBtn = myContainer.querySelector('.click-btn');
         gameBtn.setAttribute('disabled', 'disabled');
         setTimeout(() => {gameBtn.removeAttribute('disabled');}, 2000);
-        gameStatus.textContent = 'The end';
+        gameStatus.textContent = 'The end. Best: ' + sessionStorage.getItem('user_record');
     }
 
     this.heyCheater = function () {

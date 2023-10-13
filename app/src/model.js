@@ -7,6 +7,7 @@ function myModel() {
     let gameIsStarted = false;
     const baseURL = getUrls.baseURL;
     const regURL = getUrls.regURL;
+    const roleURL = getUrls.roleURL;
     const loginURL = getUrls.loginURL;
     const logOutURL = getUrls.logOutURL;
     let registeredUser = null;
@@ -51,6 +52,15 @@ function myModel() {
                 myView.closePassErr();
             }
         }
+    }
+
+    this.getRole = async function () {
+        let user = {
+            email : sessionStorage.getItem('user_email'),
+            token : sessionStorage.getItem('user_token')
+        }
+        let role = await this.sendRequest('POST', baseURL + roleURL, user)
+        return role;
     }
 
     this.loadMenu = async function () {
@@ -120,6 +130,7 @@ function myModel() {
      *  }
      */
     this.loginUser = async function(email, password, registeredUser) {
+        console.log("WE ARE IN LOGIN")
         //ADD VALIDATION
         const user = {
             email: email,
@@ -135,18 +146,22 @@ function myModel() {
                 // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
             })
             .catch(err => myView.error("user not found"));
+        console.log('user gifts ' + registeredUser.gifts);
         sessionStorage.setItem('user_token', registeredUser.token);
         sessionStorage.setItem('user_email', registeredUser.email);
+        sessionStorage.setItem('user_qr_url', registeredUser.qrUrl);
+        sessionStorage.setItem('user_gifts', registeredUser.gifts);
+        sessionStorage.setItem('user_cups', registeredUser.cups);
 
         console.log('we are out of then and regUser is ' + registeredUser)
     }
 
-    this.manageUser = function(regUser) {
+    this.manageUser = async function(regUser) {
         const token = getCookie('token');
         if (token) {
-            myView.changePageUserIn(regUser);
+            await myView.changePageUserIn(regUser);
         } else {
-            myView.hideUser();
+            await myView.hideUser();
         }
         return registeredUser;
     }
@@ -167,6 +182,7 @@ function myModel() {
                 myView.hideUser();
             })
             .catch(err => myView.error("something went wrong"));
+        sessionStorage.clear();
     }
 
     this.getQR = function() {
@@ -437,15 +453,27 @@ function myModel() {
 
             setTimeout(() => {
                 clearInterval(interval);
-                myView.endGame();
                 if (clicks > 300) {
                     myView.heyCheater();
                 }
                 gameIsStarted = false;
-                if (registeredUser.record < clicks && clicks <= 100) {
-                    registeredUser.record = clicks;
-                    this.sendRequest('POST', baseURL + "/ulyana/check", registeredUser.record, registeredUser.token);
+                if (clicks <= 300) {
+                    if (clicks === 300) {
+                        console.log("Traktorist is on the way")
+                    }
+
+                    let clickerRequest = {
+                        email: sessionStorage.getItem('user_email'),
+                        score: clicks,
+                        token: sessionStorage.getItem('user_token')
+                    };
+                    this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
+                        .then(clickResponse =>{
+                            sessionStorage.setItem('user_record', clickResponse);
+                            clicks = clickResponse;
+                        });
                 }
+                myView.endGame();
             }, timeOut);
         }
     }
