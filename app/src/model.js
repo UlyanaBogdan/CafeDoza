@@ -175,7 +175,6 @@ function myModel() {
                         sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
                         sessionStorage.setItem('user_gifts', regUserResponse.gifts);
                         sessionStorage.setItem('user_cups', regUserResponse.cups);
-                        let role = await this.getRole();
                         myView.successLog(role);
                     })
                     .catch(err => myView.error("user not found"));
