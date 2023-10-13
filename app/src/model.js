@@ -114,9 +114,6 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        console.log("we are in registration");
-        console.log(baseURL);
-        console.log(regURL);
         await this.sendRequest('POST', baseURL + regURL, user)
             .then(registeredUser => {
                 myView.successReg(registeredUser);
@@ -137,7 +134,6 @@ function myModel() {
      *  }
      */
     this.loginUser = async function (email, password, registeredUser) {
-        console.log("WE ARE IN LOGIN")
         //ADD VALIDATION
         const user = {
             email: email,
@@ -158,7 +154,6 @@ function myModel() {
         // sessionStorage.setItem('user_email', regUserResponse.email);
         // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
 
-        console.log("ROLE IS " + role);
         myView.successLog(role);
 
     }
@@ -458,9 +453,6 @@ function myModel() {
     }
 
     this.addCupsAdmin = async function (count) {
-        console.log('INSIDE ADD BUTTON ' + count);
-        console.log('EMAIL' + sessionStorage.getItem('scanned_user_email'));
-        console.log('EMAIL' + sessionStorage.getItem('scanned_user_email'));
         let bonusAdd = {
             email: sessionStorage.getItem('scanned_user_email'),
             name: sessionStorage.getItem('scanned_user_name'),

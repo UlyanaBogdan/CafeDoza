@@ -21,7 +21,6 @@ function myController() {
         const hashPageName = location.hash.slice(1).toLowerCase();
         // myModel.loadMenu();
 
-        console.log('before updateState and manageUser ' + registeredUser)
         myModel.updateState(hashPageName);
 
         registeredUser = await myModel.manageUser(registeredUser);
@@ -90,7 +89,6 @@ function myController() {
         }
 
         if (hashPageName === "bonuses") {
-            console.log('TOKEN ' + token);
             if (token) {
                 // const checkBonusesBtn = myContainer.querySelector('.check-bonuses-btn');
                 // checkBonusesBtn.addEventListener('pointerdown', checkBonuses);
@@ -124,7 +122,6 @@ function myController() {
     }
 
     function plusCupInput() {
-        console.log('plusCupInput' + adminInput.value);
         myModel.plusCupInput(Number(adminInput.value));
     }
 
@@ -163,18 +160,11 @@ function myController() {
     }
 
     function signIn() {
-        console.log('we before regUser in signUp')
-
         myModel.loginUser(inputEmail.value, inputPassword.value);
-
-        console.log('we finish in signIn' + sessionStorage.getItem('user_token'));
-
     }
 
     async function signUp() {
-        console.log('we before regUser in signUp')
         registeredUser = await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
-        console.log('we finish in signUp' + registeredUser)
     }
 
     function logout() {
