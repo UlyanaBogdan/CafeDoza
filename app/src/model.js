@@ -78,6 +78,7 @@ function myModel() {
 
             xhr.open(method, url);
             xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
 
             xhr.onload = () => {
                 if (xhr.status >= 400) {
