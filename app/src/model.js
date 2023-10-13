@@ -59,8 +59,8 @@ function myModel() {
             email : sessionStorage.getItem('user_email'),
             token : sessionStorage.getItem('user_token')
         }
-        let role = await this.sendRequest('POST', baseURL + roleURL, user)
-        return role;
+        let role =  await this.sendRequest('POST', baseURL + roleURL, user);
+        return role.role;
     }
 
     this.loadMenu = async function () {

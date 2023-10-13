@@ -61,7 +61,7 @@ function myController() {
         signUpBtn.addEventListener('pointerdown', signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
-
+        let token =sessionStorage.getItem('user_token');
         if (hashPageName === "drinklist") {
             // searchInput = myContainer.querySelector('.search-input');
             // searchInput.addEventListener('input', searchDrink)
@@ -70,8 +70,9 @@ function myController() {
             //     searchDrink();
             // });
         }
-        if (hashPageName === "adminpage") {
+        if (hashPageName === "adminpage" && token) {
             const role = await myModel.getRole();
+            console.log('ROLE INSIDE ADMINPAGE ' + role)
             if (role === 'ADMIN') {
                 const scanBtn = myContainer.querySelector('#scan-qr-btn');
                 scanBtn.addEventListener('pointerdown', scanQR);
@@ -84,26 +85,33 @@ function myController() {
                 const removeCupsFromUserBtn = myContainer.querySelector('#removebtn-admin');
                 addCupsToUserBtn.addEventListener('pointerdown', addCupsAdmin);
                 removeCupsFromUserBtn.addEventListener('pointerdown', removeCupsAdmin);
+            } else {
+                window.location.hash = '#main';
             }
         }
 
         if (hashPageName === "bonuses") {
-            // const checkBonusesBtn = myContainer.querySelector('.check-bonuses-btn');
-            // checkBonusesBtn.addEventListener('pointerdown', checkBonuses);
-            // searchCodeInput = myContainer.querySelector('.code-input');
-            // const searchCodeBtn = myContainer.querySelector('.search-btn');
-            // searchCodeBtn.addEventListener('pointerdown', searchCode);
-            // checkBonuses();
-            plusOneModal = myContainer.querySelector('.modal-coffee');
-            winBonusModal = myContainer.querySelector('.modal-congratulations');
-            plusOneModal.addEventListener('pointerdown', closePlusOneModal);
-            winBonusModal.addEventListener('pointerdown', closeWinBonusModal);
-            const startGameBtn = myContainer.querySelector('.click-btn');
-            startGameBtn.addEventListener('pointerdown', startGame);
-            const code = myContainer.querySelector('.QR-block');
-            code.addEventListener('pointerdown', openCode);
-            const openQR = myContainer.querySelector('.QR-open');
-            openQR.addEventListener('pointerdown', closeCode);
+            console.log('TOKEN ' + token);
+            if (token) {
+                // const checkBonusesBtn = myContainer.querySelector('.check-bonuses-btn');
+                // checkBonusesBtn.addEventListener('pointerdown', checkBonuses);
+                // searchCodeInput = myContainer.querySelector('.code-input');
+                // const searchCodeBtn = myContainer.querySelector('.search-btn');
+                // searchCodeBtn.addEventListener('pointerdown', searchCode);
+                // checkBonuses();
+                plusOneModal = myContainer.querySelector('.modal-coffee');
+                winBonusModal = myContainer.querySelector('.modal-congratulations');
+                plusOneModal.addEventListener('pointerdown', closePlusOneModal);
+                winBonusModal.addEventListener('pointerdown', closeWinBonusModal);
+                const startGameBtn = myContainer.querySelector('.click-btn');
+                startGameBtn.addEventListener('pointerdown', startGame);
+                const code = myContainer.querySelector('.QR-block');
+                code.addEventListener('pointerdown', openCode);
+                const openQR = myContainer.querySelector('.QR-open');
+                openQR.addEventListener('pointerdown', closeCode);
+            } else {
+                window.location.hash = '#main';
+            }
         }
 
     }
