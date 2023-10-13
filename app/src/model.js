@@ -412,6 +412,7 @@ function myModel() {
     this.scannerQR = function () {
         myView.closeScanBtn();
         const html5QrCode = new Html5Qrcode("reader");
+        console.log("IN SCANNER BEFORE CALLBACK")
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             html5QrCode.stop().then(async (ignore) => {
                 // QR Code scanning is stopped.
@@ -420,11 +421,18 @@ function myModel() {
                     email: sessionStorage.getItem('user_email'),
                     token: sessionStorage.getItem('user_token')
                 };
-                this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin)
-                    .then(scannedUser => myView.openAdminBtns(scannedUser))
-                    .catch(err => alert("User is not found"));
+                const requestUrl = baseURL + adminQrURL + decodedText;
+                console.log(admin.email);
+                console.log(admin.token);
+                console.log(requestUrl);
+                const scannedUser = await this.sendRequest('POST', baseURL + adminQrURL + decodedText, admin);
+                    // .then(scannedUser => myView.openAdminBtns(scannedUser))
+                    // .catch(err => alert("User is not found"));
+                myView.openAdminBtns(scannedUser);
+                console.log(scannedUser);
 
             }).catch((err) => {
+                console.log("INSIDE CATCH SOME ERROR SCANNER" + err)
                 // console.log(.error);
                 // Stop 3, handle it.
             });
@@ -448,7 +456,7 @@ function myModel() {
             .catch(err => alert("User is not found"));
     }
 
-    this.removeCupsAdmin = function () {
+    this.removeGiftsAdmin = function () {
         const newGifts = Number(scannedUser.gifts) - 1;
         this.sendRequest('POST', baseURL + "", newGifts)
             .then(scannedUser => myView.closeAdminBtns())

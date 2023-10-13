@@ -24,6 +24,11 @@ function myView() {
     let searchInput = null;
     let myBonusesMenu = null;
     let bonusText = null;
+    let inputDiv = null;
+    let scanQRBtn = null;
+    let adminButtons = null;
+    let userGiftsAdmin = null;
+
 
     this.init = function (container, routes) {
         myContainer = container;
@@ -46,6 +51,12 @@ function myView() {
         plusHeaderMenu = myContainer.querySelector('.plus');
         authModal = myContainer.querySelector('.auth-modal');
         modalOverlay = myContainer.querySelector('.modal-overlay');
+
+        // admin menu
+        inputDiv = myContainer.querySelector('.inputblock-admin');
+        scanQRBtn = myContainer.querySelector('.scan-qr-btn');
+        adminButtons = myContainer.querySelector('.buttons-admin');
+        userGiftsAdmin = myContainer.querySelector('.userGiftsForAdmin');
 
         buttonLog = myContainer.querySelector('.log-btn');
         buttonReg = myContainer.querySelector('.reg-btn');
@@ -280,14 +291,11 @@ function myView() {
 
     this.openAdminBtns = function(user) {
         console.log("We are in admin buttons")
-        const inputDiv = myContainer.querySelector('inputblock-admin');
-        inputDiv.classList.remove('closed');
-        const scanQRBtn = myContainer.querySelector('#scan-qr-btn');
-        scanQRBtn.classList.add('closed');
-        const adminButtons = myContainer.querySelector('#buttons-admin');
-        adminButtons.classList.remove('closed');
-        const userGiftsAdmin = myContainer.querySelector('.userGiftsForAdmin');
         userGiftsAdmin.textContent = `${user.name} has ${user.gifts} gifts`;
+        userGiftsAdmin.classList.remove('closed');
+        inputDiv.classList.remove('closed');
+        scanQRBtn.classList.add('closed');
+        adminButtons.classList.remove('closed');
     }
 
     this.closeAdminBtns = function () {

@@ -24,7 +24,7 @@ function myController() {
         console.log('before updateState and manageUser ' + registeredUser)
         myModel.updateState(hashPageName);
 
-        registeredUser = myModel.manageUser(registeredUser);
+        registeredUser = await myModel.manageUser(registeredUser);
         // await myModel.showsomething();
 
 
@@ -84,7 +84,7 @@ function myController() {
                 const addCupsToUserBtn = myContainer.querySelector('#addbtn-admin');
                 const removeCupsFromUserBtn = myContainer.querySelector('#removebtn-admin');
                 addCupsToUserBtn.addEventListener('pointerdown', addCupsAdmin);
-                removeCupsFromUserBtn.addEventListener('pointerdown', removeCupsAdmin);
+                removeCupsFromUserBtn.addEventListener('pointerdown', removeGiftsAdmin);
             } else {
                 window.location.hash = '#main';
             }
@@ -120,8 +120,8 @@ function myController() {
         myModel.addCupsAdmin();
     }
 
-    function removeCupsAdmin() {
-        myModel.removeCupsAdmin();
+    function removeGiftsAdmin() {
+        myModel.removeGiftsAdmin();
     }
 
     function plusCupInput() {
