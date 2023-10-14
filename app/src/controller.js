@@ -163,6 +163,7 @@ function myController() {
 
     async function signUp() {
         await myModel.regUser(inputEmail.value, inputPassword.value, inputName.value);
+        window.location.hash='#bonuses';
     }
 
     function logout() {

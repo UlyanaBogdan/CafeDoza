@@ -114,13 +114,14 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        await this.sendRequest('POST', baseURL + regURL, user)
-            .then(registeredUser => {
+        registeredUser = await this.sendRequest('POST', baseURL + regURL, user);
+            // .then(registeredUser => {
                 myView.successReg(registeredUser);
                 setCookie('token', registeredUser.token);
                 setCookie('email', registeredUser.email);
-            })
-            .catch(err => myView.error("something went wrong"));
+                // myView.clo
+            // })
+            // .catch(err => myView.error("something went wrong"));
     }
 
     /**

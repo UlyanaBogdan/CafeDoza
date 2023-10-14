@@ -218,7 +218,7 @@ function myView() {
         successRegModal.classList.remove('closed');
         setTimeout(() => {
             successRegModal.classList.add('closed');
-        }, 3000);
+        }, 2000);
     }
 
     this.closeSuccessRegModal = function () {
