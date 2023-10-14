@@ -630,6 +630,12 @@ h2 {
     background-color: rgba(213, 134, 134, 0.8);
 }
 
+.reg-btn:disabled,
+.reg-btn:hover:disabled {
+    background-color: rgba(238, 191, 191, 0.6);
+    cursor:not-allowed;
+}
+
 .have-acc,
 .new-here {
     border: none;

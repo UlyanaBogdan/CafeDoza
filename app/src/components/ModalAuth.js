@@ -11,7 +11,7 @@ const ModalAuth = {
           <div class="error-email"></div>
           <input type="password" class="input-password" placeholder="Password">
           <div class="error-password"></div>
-          <button type="button" class="reg-btn reg-part closed lng">sign up</button>
+          <button type="button" class="reg-btn reg-part closed lng" disabled>sign up</button>
           <button type="button" class="log-btn log-part lng">sign in</button>
           <button type="button" class="have-acc reg-part closed lng">Already have an account?</button>
           <button type="button" class="new-here log-part lng">New here?</button>

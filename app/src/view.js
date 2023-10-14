@@ -155,6 +155,8 @@ function myView() {
         this.changeToLog();
         authModal.classList.add('closed');
         modalOverlay.classList.add('closed');
+        const regBtn = myContainer.querySelector('.reg-btn');
+        regBtn.setAttribute('disabled', 'disabled');
     }
 
     this.changeToReg = function () {
@@ -334,7 +336,7 @@ function myView() {
             inputDiv.classList.add('closed');
             scanQRBtn.classList.remove('closed');
             userGiftsAdmin.textContent = "";
-        }, 1500);
+        }, 1000);
 
     }
 
@@ -374,6 +376,11 @@ function myView() {
     this.closeWinBonusModal = function () {
         const winBonusModal = myContainer.querySelector('.modal-congratulations');
         winBonusModal.classList.add('closed');
+    }
+
+    this.ableRegBtn = function () {
+        const signUpBtn = myContainer.querySelector('.reg-btn');
+        signUpBtn.removeAttribute('disabled');
     }
 
     this.error = function (errorName) {
