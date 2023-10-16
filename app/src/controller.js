@@ -99,7 +99,7 @@ function myController() {
                 plusOneModal.addEventListener('pointerdown', closePlusOneModal);
                 winBonusModal.addEventListener('pointerdown', closeWinBonusModal);
                 const startGameBtn = myContainer.querySelector('.click-btn');
-                startGameBtn.addEventListener('pointerdown', startGame);
+                startGameBtn.addEventListener('click', startGame);
                 const code = myContainer.querySelector('.QR-block');
                 code.addEventListener('pointerdown', openCode);
                 const openQR = myContainer.querySelector('.QR-open');
@@ -198,8 +198,8 @@ function myController() {
         myModel.closeWinBonusModal();
     }
 
-    async function startGame() {
-        await myModel.startGame();
+    function startGame() {
+        myModel.startGame();
     }
 
     function openCode() {

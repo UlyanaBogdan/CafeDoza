@@ -400,14 +400,29 @@ function myView() {
         clicksDiv.textContent = clicks;
     }
 
-    this.endGame = function () {
+    this.showClickerRecord = function () {
         const gameStatus = myContainer.querySelector('.game-header');
+        const loader = myContainer.querySelector('.clicker-loader');
+        loader.classList.add('closed');
+        gameStatus.textContent = 'The end. Best: ' + sessionStorage.getItem('user_record');
+    }
+
+
+    this.disableClickerButton = function () {
         const gameBtn = myContainer.querySelector('.click-btn');
+        const gameStatus = myContainer.querySelector('.game-header');
+        gameStatus.textContent = '';
         gameBtn.setAttribute('disabled', 'disabled');
+        const loader = myContainer.querySelector('.clicker-loader');
+        loader.classList.remove('closed');
+
+    }
+
+    this.enableClickerButton = function () {
+        const gameBtn = myContainer.querySelector('.click-btn');
         setTimeout(() => {
             gameBtn.removeAttribute('disabled');
-        }, 2000);
-        gameStatus.textContent = 'The end. Best: ' + sessionStorage.getItem('user_record');
+        }, 1500);
     }
 
     this.heyCheater = function () {

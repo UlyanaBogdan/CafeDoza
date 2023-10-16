@@ -501,7 +501,7 @@ function myModel() {
     }
 
     //TODO check record before, fix 1 game late
-    this.startGame = async function () {
+    this.startGame = function () {
         if (gameIsStarted) {
             clicks += 1;
             myView.updateClicks(clicks);
@@ -517,11 +517,11 @@ function myModel() {
             }, 100);
 
             setTimeout(async () => {
+                gameIsStarted = false;
                 clearInterval(interval);
                 if (clicks > 300) {
                     myView.heyCheater();
                 }
-                gameIsStarted = false;
                 if (clicks <= 300) {
                     if (clicks === 300) {
                         console.log("Traktorist is on the way")
@@ -532,13 +532,15 @@ function myModel() {
                         score: clicks,
                         token: sessionStorage.getItem('user_token')
                     };
+                    myView.disableClickerButton();
                     await this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
                         .then(clickResponse => {
                             sessionStorage.setItem('user_record', clickResponse);
-                            clicks = clickResponse;
+                            clicks = 0;
+                            myView.showClickerRecord();
                         });
                 }
-                myView.endGame();
+                myView.enableClickerButton();
             }, timeOut);
         }
     }
