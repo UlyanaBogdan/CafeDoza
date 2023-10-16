@@ -169,6 +169,12 @@ function myModel() {
     }
 
     this.manageUser = async function () {
+        if (typeof getCookie('token') === undefined) {
+            sessionStorage.clear()
+            await myView.hideUser();
+            return;
+        }
+
         const token = getCookie('token');
         if (token) {
             if (!sessionStorage.getItem('user_token')) {
@@ -192,7 +198,6 @@ function myModel() {
             sessionStorage.clear()
             await myView.hideUser();
         }
-        return;
     }
 
     this.logoutUser = function () {
@@ -496,7 +501,7 @@ function myModel() {
     }
 
     //TODO check record before, fix 1 game late
-    this.startGame = function () {
+    this.startGame = async function () {
         if (gameIsStarted) {
             clicks += 1;
             myView.updateClicks(clicks);
@@ -511,7 +516,7 @@ function myModel() {
                 myView.updateGameTime(this.formatTime(timeOut - delta));
             }, 100);
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 clearInterval(interval);
                 if (clicks > 300) {
                     myView.heyCheater();
@@ -527,7 +532,7 @@ function myModel() {
                         score: clicks,
                         token: sessionStorage.getItem('user_token')
                     };
-                    this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
+                    await this.sendRequest('POST', baseURL + "/clicker/finish", clickerRequest)
                         .then(clickResponse => {
                             sessionStorage.setItem('user_record', clickResponse);
                             clicks = clickResponse;
