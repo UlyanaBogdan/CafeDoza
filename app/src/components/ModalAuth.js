@@ -20,7 +20,7 @@ const ModalAuth = {
              data-client_id="1072002311281-avq0c6im5urd2avgor0h57437ogdoidq.apps.googleusercontent.com"
              data-context="signin"
              data-ux_mode="popup"
-             data-login_uri="http://localhost:63343"
+             data-login_uri="https://woofwoof.space"
              data-auto_select="true"
              data-itp_support="true">
           </div>
