@@ -16,6 +16,7 @@ const Progress = {
             <div class="QR-block"><img class="qr-user" src="" width="150"></div>
             <div class="QR-open closed wow animate__zoomIn"><img class="open-qr-user" src="" width="600"></div>
             <div class="progress-bar"><span class="cup-progress"></span></div>
+            <div class="cups-loader closed"></div>
             <div class="have-bonuses animate__animated animate__pulse animate__slow animate__infinite">
                 <img class="bonus-number-img" src="./img/gift.svg">
                 <p class="bonus-number"></p>

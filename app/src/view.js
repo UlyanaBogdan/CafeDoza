@@ -273,17 +273,17 @@ function myView() {
             const cups = sessionStorage.getItem('user_cups');
             if (hashPageName === "bonuses") {
                 bonusText = myContainer.querySelector('.bonuses-greeting');
-                bonusNumber = myContainer.querySelector('.bonus-number');
-                bonusNumber.textContent = gifts;
+                // bonusNumber = myContainer.querySelector('.bonus-number');
+                // bonusNumber.textContent = gifts;
                 const qr = myContainer.querySelector('.qr-user');
                 const openQr = myContainer.querySelector('.open-qr-user');
                 console.log(qrUrl);
                 qr.setAttribute('src', qrUrl);
                 openQr.setAttribute('src', qrUrl);
-                this.showBonuses(cups);
+                // this.disableBonuses();
             }
-            myBonusesMenu = myContainer.querySelector('.mybonuses');
-            myBonusesMenu.classList.remove('closed');
+            // myBonusesMenu = myContainer.querySelector('.mybonuses');
+            // myBonusesMenu.classList.remove('closed');
         }
         logoutBtn.classList.remove('closed');
         authBtn.classList.add('closed');
@@ -292,6 +292,38 @@ function myView() {
     this.showBonuses = function (cups) {
         const bonusText = myContainer.querySelector('.bonuses-greeting');
         const progressBar = myContainer.querySelector('.cup-progress');
+        bonusNumber = myContainer.querySelector('.bonus-number');
+        bonusNumber.textContent = gifts;
+        const userProgress = cups / 10 * 100;
+        bonusText.innerHTML = `You have ${cups}/10 cups♥`;
+        progressBar.animate(
+            [
+                {width: "0"},
+                {width: userProgress + '%'},
+            ],
+            {
+                duration: 1000,
+                fill: "forwards",
+                easing: "ease-in-out",
+            },
+        );
+    }
+
+    this.disableBonuses = function () {
+        const bonusText = myContainer.querySelector('.bonuses-greeting');
+        const progressBar = myContainer.querySelector('.cup-progress');
+        const cupsLoader = myContainer.querySelector('.cups-loader');
+        bonusText.classList.add('closed');
+        progressBar.classList.add('closed');
+        cupsLoader.classList.remove('closed');
+    }
+
+    this.enableBonuses = function (cups, gifts  ) {
+        const bonusText = myContainer.querySelector('.bonuses-greeting');
+        const progressBar = myContainer.querySelector('.cup-progress');
+        const cupsLoader = myContainer.querySelector('.cups-loader');
+        cupsLoader.classList.add('closed');
+
         const userProgress = cups / 10 * 100;
         bonusText.innerHTML = `You have ${cups}/10 cups♥`;
         progressBar.animate(

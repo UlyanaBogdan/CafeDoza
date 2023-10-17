@@ -174,14 +174,14 @@ function myModel() {
             await myView.hideUser();
             return;
         }
+        let refUser = {
+            email: getCookie('email'),
+            token: getCookie('token')
+        }
 
         const token = getCookie('token');
         if (token) {
             if (!sessionStorage.getItem('user_token')) {
-                let refUser = {
-                    email: getCookie('email'),
-                    token: getCookie('token')
-                }
                 let regUserResponse = await this.sendRequest('POST', baseURL + refreshURL, refUser);
                 sessionStorage.setItem('user_token', regUserResponse.token);
                 sessionStorage.setItem('user_email', regUserResponse.email);
@@ -193,7 +193,20 @@ function myModel() {
 
             }
             let role = await this.getRole();
-            await myView.changePageUserIn(role);
+            myView.disableBonuses();
+            this.sendRequest('POST', baseURL + refreshURL, refUser)
+                .then(loginUserResponse =>
+                {
+                    sessionStorage.setItem('user_gifts', loginUserResponse.gifts);
+                    sessionStorage.setItem('user_cups', loginUserResponse.cups);
+                    myView.enableBonuses(loginUserResponse.cups, loginUserResponse.gifts);
+                    myView.changePageUserIn(role);
+
+                });
+            // sessionStorage.setItem('user_gifts', loginUserResponse.gifts);
+            // sessionStorage.setItem('user_cups', loginUserResponse.cups);
+            // myView.enableBonuses(loginUserResponse.cups, loginUserResponse.gifts);
+            // await myView.changePageUserIn(role);
         } else {
             sessionStorage.clear()
             await myView.hideUser();
@@ -294,7 +307,7 @@ function myModel() {
     //                 {
     //                     email: email,
     //                     name: name,
-    //                     bonuses: 0,
+    //                      es: 0,
     //                     record: 0,
     //                     winCups: 0,
     //                 })
