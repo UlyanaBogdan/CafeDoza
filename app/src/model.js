@@ -57,6 +57,12 @@ function myModel() {
         }
     }
 
+    this.checkInputs = function (name, email, password) {
+        if (this.isEmailValid(email) && this.isPasswordValid(password)) {
+            myView.ableRegBtn();
+        }
+    }
+
     this.getRole = async function () {
         let user = {
             email: sessionStorage.getItem('user_email'),
