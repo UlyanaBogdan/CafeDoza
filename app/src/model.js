@@ -151,29 +151,49 @@ function myModel() {
      *      qrUrl,
      *  }
      */
-    this.loginUser = async function (email, password) {
+    this.loginUser = function (email, password) {
         //ADD VALIDATION
         const user = {
             email: email,
             password: password
         }
         console.log("WE'RE TRYING TO SEND LOGIN " + email + password)
-        let regUserResponse = await this.sendRequest('POST', baseURL + loginURL, user);
-        sessionStorage.setItem('user_token', regUserResponse.token);
-        sessionStorage.setItem('user_email', regUserResponse.email);
-        sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
-        sessionStorage.setItem('user_gifts', regUserResponse.gifts);
-        sessionStorage.setItem('user_cups', regUserResponse.cups);
-        let role = await this.getRole();
-        //TODO вынести
-        setCookie('token', regUserResponse.token, {expires: new Date() + 7});
-        setCookie('email', regUserResponse.email, {expires: new Date() + 7});
-        // sessionStorage.setItem('user_token', regUserResponse.token);
-        // sessionStorage.setItem('user_email', regUserResponse.email);
-        // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
+        this.sendRequest('POST', baseURL + loginURL, user)
+            .then(async regUserResponse => {
+                sessionStorage.setItem('user_token', regUserResponse.token);
+                sessionStorage.setItem('user_email', regUserResponse.email);
+                sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+                sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+                sessionStorage.setItem('user_cups', regUserResponse.cups);
+                let role = await this.getRole();
+                //TODO вынести
+                setCookie('token', regUserResponse.token, {expires: new Date() + 7});
+                setCookie('email', regUserResponse.email, {expires: new Date() + 7});
+                // sessionStorage.setItem('user_token', regUserResponse.token);
+                // sessionStorage.setItem('user_email', regUserResponse.email);
+                // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
 
-        myView.successLog(role);
-
+                myView.successLog(role);
+            })
+            .catch(err => myView.error('user not found'));
+        // if (regUserResponse.status === 500) {
+        //     myView.error('user not found');
+        // } else {
+        //     sessionStorage.setItem('user_token', regUserResponse.token);
+        //     sessionStorage.setItem('user_email', regUserResponse.email);
+        //     sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+        //     sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+        //     sessionStorage.setItem('user_cups', regUserResponse.cups);
+        //     let role = await this.getRole();
+        //     //TODO вынести
+        //     setCookie('token', regUserResponse.token, {expires: new Date() + 7});
+        //     setCookie('email', regUserResponse.email, {expires: new Date() + 7});
+        //     // sessionStorage.setItem('user_token', regUserResponse.token);
+        //     // sessionStorage.setItem('user_email', regUserResponse.email);
+        //     // sessionStorage.setItem('user_qr_link', regUserResponse.qrcode);
+        //
+        //     myView.successLog(role);
+        // }
     }
 
     this.manageUser = async function () {
