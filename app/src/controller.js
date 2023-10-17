@@ -39,12 +39,19 @@ function myController() {
         let clearSearchBtn = myContainer.querySelector('.clear-search-btn');
 
         inputEmail = myContainer.querySelector('.email-input');
-        inputEmail.addEventListener('input', checkEmail);
+        inputEmail.addEventListener('input', function () {
+            checkInputs();
+            checkEmail();
+        });
 
         inputPassword = myContainer.querySelector('.input-password');
-        inputPassword.addEventListener('input', checkPassword);
+        inputPassword.addEventListener('input', function () {
+            checkInputs();
+            checkPassword();
+        });
 
         inputName = myContainer.querySelector('.name-input');
+        inputName.addEventListener('input', checkInputs);
 
 
         successRegModal = myContainer.querySelector('.successful-reg-modal');
@@ -55,7 +62,7 @@ function myController() {
         changeToRegBtn.addEventListener('pointerdown', changeToReg);
         changeToLogBtn.addEventListener('pointerdown', changeToLog);
         signInBtn.addEventListener('pointerdown', await signIn);
-        signUpBtn.addEventListener('pointerdown', await signUp);
+        signUpBtn.addEventListener('click', await signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
         let token = sessionStorage.getItem('user_token');
@@ -109,6 +116,10 @@ function myController() {
             }
         }
 
+    }
+
+    function checkInputs() {
+        myModel.checkInputs(inputName.value, inputEmail.value, inputPassword.value);
     }
 
     function addCupsAdmin() {

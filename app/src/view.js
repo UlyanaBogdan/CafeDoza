@@ -111,6 +111,15 @@ function myView() {
         const errorDiv = myContainer.querySelector('.error-password');
         errorDiv.textContent = "It must be at least 6 characters long and contain at least one uppercase letter, and one number digit";
     }
+
+    this.enableRegBtn = function() {
+        myContainer.querySelector('.reg-btn').removeAttribute('disabled');
+    }
+
+    this.disableRegBtn = function() {
+        myContainer.querySelector('.reg-btn').setAttribute('disabled', 'disabled');
+    }
+
     this.closePassErr = function () {
         const errorDiv = myContainer.querySelector('.error-password');
         errorDiv.textContent = "";

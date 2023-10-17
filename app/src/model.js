@@ -33,6 +33,14 @@ function myModel() {
         return PASS_REGEXP.test(password);
     }
 
+    this.checkInputs = function (name, email, password) {
+        if (name && this.isEmailValid(email) && this.isPasswordValid(password)) {
+            myView.enableRegBtn();
+        } else {
+            myView.disableRegBtn();
+        }
+    }
+
     this.checkEmail = function (email) {
         if (email === "") {
             myView.closeEmailErr();
@@ -453,7 +461,7 @@ function myModel() {
             });
 
         };
-        const config = {fps: 10, qrbox: {width: 250, height: 250}};
+        const config = {fps: 10, qrbox: {width: 300, height: 300}};
 // If you want to prefer back camera
         html5QrCode.start({facingMode: "environment"}, config, await qrCodeSuccessCallback);
 //
