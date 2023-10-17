@@ -175,7 +175,7 @@ function myModel() {
 
                 myView.successLog(role);
             })
-            .catch(err => myView.error('user not found'));
+            .catch(err => myView.error('invalid credentials'));
         // if (regUserResponse.status === 500) {
         //     myView.error('user not found');
         // } else {
