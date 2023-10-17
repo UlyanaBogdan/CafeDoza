@@ -40,18 +40,20 @@ function myController() {
 
         inputEmail = myContainer.querySelector('.email-input');
         inputEmail.addEventListener('input', function () {
-            checkInputs();
+            checkInputsLog();
+            checkInputsReg();
             checkEmail();
         });
 
         inputPassword = myContainer.querySelector('.input-password');
         inputPassword.addEventListener('input', function () {
-            checkInputs();
+            checkInputsLog();
+            checkInputsReg();
             checkPassword();
         });
 
         inputName = myContainer.querySelector('.name-input');
-        inputName.addEventListener('input', checkInputs);
+        inputName.addEventListener('input', checkInputsReg);
 
 
         successRegModal = myContainer.querySelector('.successful-reg-modal');
@@ -61,7 +63,7 @@ function myController() {
         closeAuthModalBtn.addEventListener('pointerdown', closeAuthModal);
         changeToRegBtn.addEventListener('pointerdown', changeToReg);
         changeToLogBtn.addEventListener('pointerdown', changeToLog);
-        signInBtn.addEventListener('pointerdown', await signIn);
+        signInBtn.addEventListener('click', await signIn);
         signUpBtn.addEventListener('click', await signUp);
         signOutBtn.addEventListener('pointerdown', logout);
         successRegModal.addEventListener('pointerdown', closeSuccessRegModal);
@@ -118,8 +120,16 @@ function myController() {
 
     }
 
-    function checkInputs() {
-        myModel.checkInputs(inputName.value, inputEmail.value, inputPassword.value);
+    function checkInputsReg() {
+        if (signInBtn.classList.contains('closed')) {
+            myModel.checkInputsReg(inputName.value, inputEmail.value, inputPassword.value);
+        }
+    }
+
+    function checkInputsLog() {
+        if (signUpBtn.classList.contains('closed')) {
+            myModel.checkInputsLog(inputEmail.value, inputPassword.value);
+        }
     }
 
     function addCupsAdmin() {

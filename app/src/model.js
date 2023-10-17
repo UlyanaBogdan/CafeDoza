@@ -33,11 +33,19 @@ function myModel() {
         return PASS_REGEXP.test(password);
     }
 
-    this.checkInputs = function (name, email, password) {
+    this.checkInputsReg = function (name, email, password) {
         if (name && this.isEmailValid(email) && this.isPasswordValid(password)) {
             myView.enableRegBtn();
         } else {
             myView.disableRegBtn();
+        }
+    }
+
+    this.checkInputsLog = function (email, password) {
+        if (email && password) {
+            myView.enableLogBtn();
+        } else {
+            myView.disableLogBtn();
         }
     }
 

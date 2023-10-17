@@ -630,7 +630,8 @@ h2 {
     background-color: rgba(213, 134, 134, 0.8);
 }
 
-.reg-btn:disabled {
+.reg-btn:disabled,
+.log-btn:disabled{
     background-color: rgba(255, 195, 195, 0.5);
     cursor: default;
 }

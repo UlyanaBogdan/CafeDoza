@@ -120,6 +120,14 @@ function myView() {
         myContainer.querySelector('.reg-btn').setAttribute('disabled', 'disabled');
     }
 
+    this.enableLogBtn = function() {
+        myContainer.querySelector('.log-btn').removeAttribute('disabled');
+    }
+
+    this.disableLogBtn = function() {
+        myContainer.querySelector('.log-btn').setAttribute('disabled', 'disabled');
+    }
+
     this.closePassErr = function () {
         const errorDiv = myContainer.querySelector('.error-password');
         errorDiv.textContent = "";
