@@ -1010,7 +1010,7 @@ h2 {
 .QR-open {
     position: fixed;
     z-index: 5;
-    top: calc((100vh - 550px)/2);
+    top: 100px;
 }
 #reader {
     width: 300px;

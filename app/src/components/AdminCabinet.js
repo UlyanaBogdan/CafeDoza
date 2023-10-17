@@ -5,7 +5,7 @@ const AdminCabinet = {
                 <div class="qr-scan-block">
                     <button type="button" id="scan-qr-btn" class="scan-qr-btn">TAP TO SCAN QR</button>
                     <div id="reader"></div>
-                        <p class="userGiftsForAdmin closed"></p>
+                    <p class="userGiftsForAdmin closed"></p>
                     <div class="inputblock-admin closed">
                         <button type="button" class="remove-cups">-</button>
                         <input type="number" class="input-admin" value="1">
