@@ -389,8 +389,8 @@ function myView() {
         const errorBlock = myContainer.querySelector('.error-modal');
         errorBlock.classList.remove('closed');
         const errorText = myContainer.querySelector('.error-text');
-        if (errorName === "empty input") {
-            errorText.textContent = "Please fill the input";
+        if (errorName === "user is reg") {
+            errorText.textContent = "User is already registered";
         } else if (errorName === "invalid credentials") {
             errorText.textContent = "Invalid credentials";
         } else {
