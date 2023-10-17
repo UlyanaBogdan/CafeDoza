@@ -391,8 +391,8 @@ function myView() {
         const errorText = myContainer.querySelector('.error-text');
         if (errorName === "empty input") {
             errorText.textContent = "Please fill the input";
-        } else if (errorName === "user not found") {
-            errorText.textContent = "User is not found";
+        } else if (errorName === "invalid credentials") {
+            errorText.textContent = "Invalid credentials";
         } else {
             errorText.textContent = "Error: " + errorName;
         }
