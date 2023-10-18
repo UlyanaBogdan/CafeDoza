@@ -475,6 +475,13 @@ function myView() {
     }
 
     this.closeCode = function () {
+        const scrollTarget = myContainer.querySelector('#click-btn');
+        const elementPosition = scrollTarget.getBoundingClientRect().top;
+        const offsetPosition = elementPosition - 70;
+        window.scrollBy({
+            top: offsetPosition,
+            behaviour: 'smooth'
+        })
         const code = myContainer.querySelector('.QR-open');
         code.classList.add('closed');
         modalOverlay.classList.add('closed');
