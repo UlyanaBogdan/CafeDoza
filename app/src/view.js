@@ -325,6 +325,7 @@ function myView() {
     }
 
     this.closeScanBtn = function () {
+        myContainer.querySelector('#reader').classList.remove('closed');
         const scanBtn = myContainer.querySelector('#scan-qr-btn');
         scanBtn.classList.add('closed');
     }
@@ -335,8 +336,9 @@ function myView() {
     }
 
     this.openAdminBtns = function (user) {
-        console.log("We are in admin buttons")
-        userGiftsAdmin.textContent = `${user.name} ${user.gifts} gifts ${user.cups} cups`;
+        console.log("We are in admin buttons");
+        myContainer.querySelector('#reader').classList.add('closed');
+        userGiftsAdmin.innerHTML = `${user.name}<br>${user.gifts} gifts<br>${user.cups} cups`;
         userGiftsAdmin.classList.remove('closed');
         inputDiv.classList.remove('closed');
         scanQRBtn.classList.add('closed');
@@ -346,6 +348,7 @@ function myView() {
     this.closeAdminBtns = function (updatedUser) {
         this.updateAdminBtnsCount(updatedUser);
         setTimeout(() => {
+            // myContainer.querySelector('#reader').classList.remove('closed');
             adminButtons.classList.add('closed');
             userGiftsAdmin.classList.add('closed');
             inputDiv.classList.add('closed');
@@ -356,7 +359,7 @@ function myView() {
     }
 
     this.updateAdminBtnsCount = function (user) {
-        userGiftsAdmin.textContent = `${user.name} ${user.gifts} gifts ${user.cups} cups`;
+        userGiftsAdmin.innerHTML = `${user.name}<br>${user.gifts} gifts<br>${user.cups} cups`;
     }
 
     this.clearCodeInput = function () {
