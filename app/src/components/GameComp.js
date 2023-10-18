@@ -6,7 +6,7 @@ const GameComp = {
               <p class="clicker-loader closed"></p>
               <p class="game-header lng">Tap the logo to start!</p>
               <p class="clicks lng"></p>
-              <button class="click-btn"><img src="https://i.postimg.cc/WzTxx2Wy/logo.png"></button>
+              <button class="click-btn" id="click-btn"><img src="https://i.postimg.cc/WzTxx2Wy/logo.png"></button>
             </section>
             `;
     }
