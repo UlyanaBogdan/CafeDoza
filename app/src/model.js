@@ -130,21 +130,39 @@ function myModel() {
          *      qrUrl,
          *  }
          */
-        const regUserResponse = await this.sendRequest('POST', baseURL + regURL, user);
+        this.sendRequest('POST', baseURL + regURL, user)
+            .then(async regUserResponse => {
+                sessionStorage.setItem('user_token', regUserResponse.token);
+                sessionStorage.setItem('user_email', regUserResponse.email);
+                sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+                sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+                sessionStorage.setItem('user_cups', regUserResponse.cups);
+                let role = await this.getRole();
+                //TODO вынести
+                setCookie('token', regUserResponse.token, {expires: new Date() + 7});
+                setCookie('email', regUserResponse.email, {expires: new Date() + 7});
+                myView.successLog(role);
+                setTimeout(() => {
+                    myView.successReg();
+                }, 1000);
+                // setCookie('token', regUserResponse.token);
+                // setCookie('email', regUserResponse.email);
+            })
+            .catch(() => myView.error('user is reg'));
             // .then(registeredUser => {
-        sessionStorage.setItem('user_token', regUserResponse.token);
-        sessionStorage.setItem('user_email', regUserResponse.email);
-        sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
-        sessionStorage.setItem('user_gifts', regUserResponse.gifts);
-        sessionStorage.setItem('user_cups', regUserResponse.cups);
-        let role = await this.getRole();
-        //TODO вынести
-        setCookie('token', regUserResponse.token, {expires: new Date() + 7});
-        setCookie('email', regUserResponse.email, {expires: new Date() + 7});
-                myView.successReg(regUserResponse);
-                setCookie('token', regUserResponse.token);
-                setCookie('email', regUserResponse.email);
-        myView.successLog(role);
+        // sessionStorage.setItem('user_token', regUserResponse.token);
+        // sessionStorage.setItem('user_email', regUserResponse.email);
+        // sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
+        // sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+        // sessionStorage.setItem('user_cups', regUserResponse.cups);
+        // let role = await this.getRole();
+        // //TODO вынести
+        // setCookie('token', regUserResponse.token, {expires: new Date() + 7});
+        // setCookie('email', regUserResponse.email, {expires: new Date() + 7});
+        //         myView.successReg(regUserResponse);
+        //         setCookie('token', regUserResponse.token);
+        //         setCookie('email', regUserResponse.email);
+        // myView.successLog(role);
                 // myView.clo
             // })
             // .catch(err => myView.error("something went wrong"));
