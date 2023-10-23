@@ -230,8 +230,7 @@ function myView() {
         window.location.hash = "#adminpage";
     }
 
-    this.successReg = function (user) {
-        this.successLog(user);
+    this.successReg = function () {
         successRegModal.classList.remove('closed');
         setTimeout(() => {
             successRegModal.classList.add('closed');
