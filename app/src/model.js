@@ -242,9 +242,19 @@ function myModel() {
                 sessionStorage.setItem('user_qr_url', regUserResponse.qrUrl);
                 sessionStorage.setItem('user_gifts', regUserResponse.gifts);
                 sessionStorage.setItem('user_cups', regUserResponse.cups);
+                console.log(`${regUserResponse.gifts} ${regUserResponse.cups}`);
                 let role = await this.getRole();
                 myView.successLog(role);
-
+            } else {
+                let refUser = {
+                    email: getCookie('email'),
+                    token: getCookie('token')
+                }
+                let regUserResponse = await this.sendRequest('POST', baseURL + refreshURL, refUser);
+                if (sessionStorage.getItem('user_cups') != regUserResponse.cups || sessionStorage.getItem('user_gifts') != regUserResponse.gifts) {
+                    sessionStorage.setItem('user_gifts', regUserResponse.gifts);
+                    sessionStorage.setItem('user_cups', regUserResponse.cups);
+                }
             }
             let role = await this.getRole();
             await myView.changePageUserIn(role);
